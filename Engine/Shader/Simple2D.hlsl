@@ -35,13 +35,13 @@ VS_OUT VS(float4 pos : POSITION, float4 uv : TEXCOORD)
     float2 rotatePosition;
     float sinA = sin(g_rotation);
     float cosA = cos(g_rotation);
-    rotatePosition.x = localPosition * cosA - localPosition.y * sinA;
-    rotatePosition.y = localPosition * sinA + localPosition.y * cosA;
+    rotatePosition.x = localPosition.x * cosA - localPosition.y * sinA;
+    rotatePosition.y = localPosition.x * sinA + localPosition.y * cosA;
 
-    float2 pixelPosition = rotatePosition + (g_size / 2); // 指定された中心座標へ平行移動する
+    float2 pixelPosition = rotatePosition + g_position + (g_size / 2); // 指定された中心座標へ平行移動する
     
     // ピクセル座標からDirectXのスクリーン座標に変換
-    outData.pos.x = (pixelPosition.x / g_screenSize.x) * 2.0f - 1.0f;
+    outData.pos.x = (pixelPosition.x/ g_screenSize.x) * 2.0f - 1.0f;
     outData.pos.y = 1.0f - (pixelPosition.y / g_screenSize.y) * 2.0f;
     outData.pos.z = 0.0f;
     outData.pos.w = 1.0f;
@@ -54,5 +54,6 @@ VS_OUT VS(float4 pos : POSITION, float4 uv : TEXCOORD)
 // ピクセルシェーダー
 float4 PS(VS_OUT inData) : SV_Target
 {
-    return g_color * g_texture.Sample(g_sampler, inData.uv);
+    return float4(1.0f, 0.0f, 0.0f, 0.2f);
+//    return g_color * g_texture.Sample(g_sampler, inData.uv);
 }

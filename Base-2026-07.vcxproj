@@ -171,6 +171,7 @@
     <ClCompile Include="Engine\Scene\SceneManager.cpp" />
     <ClCompile Include="Engine\Time.cpp" />
     <ClCompile Include="Source\MyLibrary\ButtonArea.cpp" />
+    <ClCompile Include="Source\PlayScene\Player.cpp" />
     <ClCompile Include="Source\PlayScene\PlayScene.cpp" />
     <ClCompile Include="Source\TitleScene\TitleScene.cpp" />
   </ItemGroup>
@@ -194,6 +195,8 @@
     <ClInclude Include="Engine\Screen.h" />
     <ClInclude Include="Engine\Time.h" />
     <ClInclude Include="Source\MyLibrary\ButtonArea.h" />
+    <ClInclude Include="Source\MyLibrary\MyStruct.h" />
+    <ClInclude Include="Source\PlayScene\Player.h" />
     <ClInclude Include="Source\PlayScene\PlayScene.h" />
     <ClInclude Include="Source\TitleScene\TitleScene.h" />
   </ItemGroup>

@@ -8,6 +8,23 @@ Sprite::Sprite()
 	pConstantBuffer_(nullptr),
 	pTexture_(nullptr)
 {
+	// ブレンドステートの作成
+	D3D11_BLEND_DESC blendDesc;
+	ZeroMemory(&blendDesc, sizeof(blendDesc));
+	blendDesc.AlphaToCoverageEnable = FALSE;
+	blendDesc.IndependentBlendEnable = FALSE;
+	blendDesc.RenderTarget[0].BlendEnable = TRUE;
+	blendDesc.RenderTarget[0].SrcBlend = D3D11_BLEND_SRC_ALPHA;
+	blendDesc.RenderTarget[0].DestBlend = D3D11_BLEND_INV_SRC_ALPHA;
+	blendDesc.RenderTarget[0].BlendOp = D3D11_BLEND_OP_ADD;
+	blendDesc.RenderTarget[0].SrcBlendAlpha = D3D11_BLEND_ONE;
+	blendDesc.RenderTarget[0].DestBlendAlpha = D3D11_BLEND_ZERO;
+	blendDesc.RenderTarget[0].BlendOpAlpha = D3D11_BLEND_OP_ADD;
+	blendDesc.RenderTarget[0].RenderTargetWriteMask = D3D11_COLOR_WRITE_ENABLE_ALL;
+	if (FAILED(Direct3D::pDevice->CreateBlendState(&blendDesc, &pBlendState_)))
+	{
+		MessageBox(NULL, L"ブレンドステートの作成に失敗しました", L"エラー", MB_OK);
+	}
 }
 
 Sprite::~Sprite()
@@ -51,6 +68,11 @@ void Sprite::DrawGraph(int x, int y, RECT rect, int width, int height, float rot
 
 	Direct3D::pContext->Unmap(pConstantBuffer_, 0); // 再開
 
+	float blendFactor[] = { 0.0f, 0.0f, 0.0f, 0.0f };
+	UINT sampleMask = 0xffffffff;
+	Direct3D::pContext->OMSetBlendState(pBlendState_, blendFactor, sampleMask);
+
+
 	// 頂点バッファ
 	UINT stride = sizeof(S_VERTEX);
 	UINT offset = 0;
@@ -73,6 +95,7 @@ void Sprite::Release()
 	SAFE_RELEASE(pTexture_);
 	SAFE_DELETE(pTexture_);
 
+	SAFE_RELEASE(pBlendState_);
 	SAFE_RELEASE(pConstantBuffer_);
 	SAFE_RELEASE(pIndexBuffer_);
 	SAFE_RELEASE(pVertexBuffer_);

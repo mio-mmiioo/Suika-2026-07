@@ -6,7 +6,7 @@ namespace Image
 	std::vector<ImageData*> imageList; // 読み込んだ画像を管理するためのクラス
 
 	float DEFAULT_ROTATE = 0.0f;	// 画像のrotateがセットされていない場合の値
-	float DEFAULT_ALPHA = 1.0f;		// 画像のalphaがセットされていない場合の値
+	float DEFAULT_ALPHA = 0.0f;		// 画像のalphaがセットされていない場合の値
 
 	/// <summary>
 	/// 画像を描画する

@@ -90,6 +90,9 @@
     <ClCompile Include="Source\MyLibrary\ButtonArea.cpp">
       <Filter>Source\MyLibrary</Filter>
     </ClCompile>
+    <ClCompile Include="Source\PlayScene\Player.cpp">
+      <Filter>Source\PlayScene</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\Data\CsvReader.h">
@@ -153,6 +156,12 @@
       <Filter>Source\PlayScene</Filter>
     </ClInclude>
     <ClInclude Include="Source\MyLibrary\ButtonArea.h">
+      <Filter>Source\MyLibrary</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\PlayScene\Player.h">
+      <Filter>Source\PlayScene</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\MyLibrary\MyStruct.h">
       <Filter>Source\MyLibrary</Filter>
     </ClInclude>
   </ItemGroup>

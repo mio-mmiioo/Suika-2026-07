@@ -75,9 +75,6 @@ HRESULT Texture::Load(std::string fileName)
 	samplerDesc.AddressU = D3D11_TEXTURE_ADDRESS_CLAMP;
 	samplerDesc.AddressV = D3D11_TEXTURE_ADDRESS_CLAMP;
 	samplerDesc.AddressW = D3D11_TEXTURE_ADDRESS_CLAMP;
-	//samplerDesc.AddressU = D3D11_TEXTURE_ADDRESS_WRAP;
-	//samplerDesc.AddressV = D3D11_TEXTURE_ADDRESS_WRAP;
-	//samplerDesc.AddressW = D3D11_TEXTURE_ADDRESS_WRAP;
 	Direct3D::pDevice->CreateSamplerState(&samplerDesc, &pSampler_);
 	if (FAILED(hr))
 	{

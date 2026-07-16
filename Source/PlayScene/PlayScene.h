@@ -1,6 +1,8 @@
 #pragma once
 #include "../../Engine/Scene/Scene.h"
 
+class Player;
+
 class PlayScene : public Scene
 {
 public:
@@ -11,4 +13,5 @@ public:
 
 private:
 	int hBackground_;
+	Player* player_;
 };

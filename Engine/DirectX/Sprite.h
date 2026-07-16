@@ -67,6 +67,7 @@ private:
 	ID3D11Buffer* pVertexBuffer_;	// 頂点バッファ
 	ID3D11Buffer* pIndexBuffer_;	// インデックスバッファ
 	ID3D11Buffer* pConstantBuffer_; // コンスタントバッファ
+	ID3D11BlendState* pBlendState_;	// ブレンドステート
 
 	Texture* pTexture_; // 画像
 };
