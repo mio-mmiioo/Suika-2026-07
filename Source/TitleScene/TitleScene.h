@@ -1,0 +1,20 @@
+#pragma once
+#include "../../Engine/Scene/Scene.h"
+#include "../MyLibrary/ButtonArea.h"
+#include <string>
+
+class TitleScene : public Scene
+{
+public:
+	TitleScene();
+	~TitleScene() override;
+	void Update() override;
+	void Draw() override;
+
+private:
+	Button* newStart_;				// はじめる
+	Area title_;					// タイトルの画像
+	std::string backgroundImage_;	// 背景
+	std::string bgm_;				// bgm
+	int hBackground_;
+};

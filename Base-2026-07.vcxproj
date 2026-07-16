@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>18.0</VCProjectVersion>
+    <Keyword>Win32Proj</Keyword>
+    <ProjectGuid>{f0e23356-e0f1-4a8a-bd86-f7e4dfef6a04}</ProjectGuid>
+    <RootNamespace>Base202607</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+    <ProjectName>suika</ProjectName>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v145</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v145</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v145</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v145</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <UseStructuredOutput>true</UseStructuredOutput>
+    <IncludePath>C:\Program Files\Autodesk\FBX\FBX SDK\2020.3.9\include;C:\Program Files\Autodesk\FBX\FBX SDK\2020.3.7\include;$(IncludePath)</IncludePath>
+    <LibraryPath>C:\Program Files\Autodesk\FBX\FBX SDK\2020.3.9\lib\x64\debug;C:\Program Files\Autodesk\FBX\FBX SDK\2020.3.7\lib\x64\debug;$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <UseStructuredOutput>true</UseStructuredOutput>
+    <IncludePath>C:\Program Files\Autodesk\FBX\FBX SDK\2020.3.9\include;C:\Program Files\Autodesk\FBX\FBX SDK\2020.3.7\include;$(IncludePath)</IncludePath>
+    <LibraryPath>C:\Program Files\Autodesk\FBX\FBX SDK\2020.3.9\lib\x64\release;C:\Program Files\Autodesk\FBX\FBX SDK\2020.3.7\lib\x64\release;$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <AdditionalOptions>/utf-8 %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalIncludeDirectories>$(MSBuildThisFileDirectory)..\..\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+    <FxCompile>
+      <EntryPointName>VS</EntryPointName>
+      <ShaderModel>5.0</ShaderModel>
+      <ShaderType>Vertex</ShaderType>
+    </FxCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <AdditionalOptions>/utf-8 %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalIncludeDirectories>$(MSBuildThisFileDirectory)..\..\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+    <FxCompile>
+      <EntryPointName>VS</EntryPointName>
+      <ShaderModel>5.0</ShaderModel>
+      <ShaderType>Vertex</ShaderType>
+    </FxCompile>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="Engine\Camera.cpp" />
+    <ClCompile Include="Engine\Data\CsvReader.cpp" />
+    <ClCompile Include="Engine\Data\Image.cpp" />
+    <ClCompile Include="Engine\Data\Model.cpp" />
+    <ClCompile Include="Engine\Data\Sound.cpp" />
+    <ClCompile Include="Engine\DirectX\Direct3D.cpp" />
+    <ClCompile Include="Engine\DirectX\Fbx.cpp" />
+    <ClCompile Include="Engine\DirectX\Sprite.cpp" />
+    <ClCompile Include="Engine\DirectX\Texture.cpp" />
+    <ClCompile Include="Engine\Input.cpp" />
+    <ClCompile Include="Engine\Main.cpp" />
+    <ClCompile Include="Engine\ObjectManager\Object3D.cpp" />
+    <ClCompile Include="Engine\ObjectManager\ObjectManager.cpp" />
+    <ClCompile Include="Engine\ObjectManager\Transform.cpp" />
+    <ClCompile Include="Engine\Scene\SceneManager.cpp" />
+    <ClCompile Include="Engine\Time.cpp" />
+    <ClCompile Include="Source\MyLibrary\ButtonArea.cpp" />
+    <ClCompile Include="Source\PlayScene\PlayScene.cpp" />
+    <ClCompile Include="Source\TestScene.cpp" />
+    <ClCompile Include="Source\TitleScene\TitleScene.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Engine\Camera.h" />
+    <ClInclude Include="Engine\Data\CsvReader.h" />
+    <ClInclude Include="Engine\Data\Image.h" />
+    <ClInclude Include="Engine\Data\Model.h" />
+    <ClInclude Include="Engine\Data\Sound.h" />
+    <ClInclude Include="Engine\DirectX\Direct3D.h" />
+    <ClInclude Include="Engine\DirectX\Fbx.h" />
+    <ClInclude Include="Engine\DirectX\Sprite.h" />
+    <ClInclude Include="Engine\DirectX\Texture.h" />
+    <ClInclude Include="Engine\Input.h" />
+    <ClInclude Include="Engine\ObjectManager\GamaObject.h" />
+    <ClInclude Include="Engine\ObjectManager\Object3D.h" />
+    <ClInclude Include="Engine\ObjectManager\ObjectManager.h" />
+    <ClInclude Include="Engine\ObjectManager\Transform.h" />
+    <ClInclude Include="Engine\Scene\Scene.h" />
+    <ClInclude Include="Engine\Scene\SceneManager.h" />
+    <ClInclude Include="Engine\Screen.h" />
+    <ClInclude Include="Engine\Time.h" />
+    <ClInclude Include="Source\MyLibrary\ButtonArea.h" />
+    <ClInclude Include="Source\PlayScene\PlayScene.h" />
+    <ClInclude Include="Source\TestScene.h" />
+    <ClInclude Include="Source\TitleScene\TitleScene.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <FxCompile Include="Engine\Shader\Simple2D.hlsl" />
+    <FxCompile Include="Engine\Shader\Simple3D.hlsl" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+    <Import Project="packages\directxtex_desktop_win10.2026.5.8.1\build\native\directxtex_desktop_win10.targets" Condition="Exists('packages\directxtex_desktop_win10.2026.5.8.1\build\native\directxtex_desktop_win10.targets')" />
+    <Import Project="packages\directxtk_desktop_win10.2026.5.8.1\build\native\directxtk_desktop_win10.targets" Condition="Exists('packages\directxtk_desktop_win10.2026.5.8.1\build\native\directxtk_desktop_win10.targets')" />
+  </ImportGroup>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>このプロジェクトは、このコンピューター上にない NuGet パッケージを参照しています。それらのパッケージをダウンロードするには、[NuGet パッケージの復元] を使用します。詳細については、http://go.microsoft.com/fwlink/?LinkID=322105 を参照してください。見つからないファイルは {0} です。</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('packages\directxtex_desktop_win10.2026.5.8.1\build\native\directxtex_desktop_win10.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\directxtex_desktop_win10.2026.5.8.1\build\native\directxtex_desktop_win10.targets'))" />
+    <Error Condition="!Exists('packages\directxtk_desktop_win10.2026.5.8.1\build\native\directxtk_desktop_win10.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\directxtk_desktop_win10.2026.5.8.1\build\native\directxtk_desktop_win10.targets'))" />
+  </Target>
+</Project>

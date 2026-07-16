@@ -1,0 +1,176 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source">
+      <UniqueIdentifier>{b0a91f2f-5c72-4f29-8c76-1990c1dec33b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\TitleScene">
+      <UniqueIdentifier>{bf9e8422-1d35-4195-b8a0-4595af97875f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\PlayScene">
+      <UniqueIdentifier>{ef46a74e-cc67-4ef1-bb87-5b5f013dc213}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01.Engine">
+      <UniqueIdentifier>{89fefa17-b693-416a-8ed7-5bf832927f2b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01.Engine\Data">
+      <UniqueIdentifier>{3f3fcc0c-d239-4c17-a77f-4dedde6136e3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01.Engine\Shader">
+      <UniqueIdentifier>{30f288a8-13f2-410e-b1b2-0061c3a619df}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01.Engine\DirectX">
+      <UniqueIdentifier>{5b24d58f-63c0-4fd6-9bac-cef949241d16}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01.Engine\Scene">
+      <UniqueIdentifier>{7d094928-7426-429c-80ad-250c55cfe9ed}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01.Engine\ObjectManager">
+      <UniqueIdentifier>{29f1933c-e8b4-43b1-b4b2-9645fa361b5b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\MyLibrary">
+      <UniqueIdentifier>{442a077d-0b8f-481d-9e42-0ef95fa9eaf0}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Source\TestScene.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Data\CsvReader.cpp">
+      <Filter>01.Engine\Data</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Data\Image.cpp">
+      <Filter>01.Engine\Data</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Data\Model.cpp">
+      <Filter>01.Engine\Data</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Data\Sound.cpp">
+      <Filter>01.Engine\Data</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\DirectX\Direct3D.cpp">
+      <Filter>01.Engine\DirectX</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\DirectX\Fbx.cpp">
+      <Filter>01.Engine\DirectX</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\DirectX\Sprite.cpp">
+      <Filter>01.Engine\DirectX</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\DirectX\Texture.cpp">
+      <Filter>01.Engine\DirectX</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\ObjectManager\Object3D.cpp">
+      <Filter>01.Engine\ObjectManager</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\ObjectManager\ObjectManager.cpp">
+      <Filter>01.Engine\ObjectManager</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\ObjectManager\Transform.cpp">
+      <Filter>01.Engine\ObjectManager</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Scene\SceneManager.cpp">
+      <Filter>01.Engine\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Camera.cpp">
+      <Filter>01.Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Input.cpp">
+      <Filter>01.Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Main.cpp">
+      <Filter>01.Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Time.cpp">
+      <Filter>01.Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\TitleScene\TitleScene.cpp">
+      <Filter>Source\TitleScene</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\PlayScene\PlayScene.cpp">
+      <Filter>Source\PlayScene</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\MyLibrary\ButtonArea.cpp">
+      <Filter>Source\MyLibrary</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Source\TestScene.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Data\CsvReader.h">
+      <Filter>01.Engine\Data</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Data\Image.h">
+      <Filter>01.Engine\Data</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Data\Model.h">
+      <Filter>01.Engine\Data</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Data\Sound.h">
+      <Filter>01.Engine\Data</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\DirectX\Direct3D.h">
+      <Filter>01.Engine\DirectX</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\DirectX\Fbx.h">
+      <Filter>01.Engine\DirectX</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\DirectX\Sprite.h">
+      <Filter>01.Engine\DirectX</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\DirectX\Texture.h">
+      <Filter>01.Engine\DirectX</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\ObjectManager\GamaObject.h">
+      <Filter>01.Engine\ObjectManager</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\ObjectManager\Object3D.h">
+      <Filter>01.Engine\ObjectManager</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\ObjectManager\ObjectManager.h">
+      <Filter>01.Engine\ObjectManager</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\ObjectManager\Transform.h">
+      <Filter>01.Engine\ObjectManager</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Scene\Scene.h">
+      <Filter>01.Engine\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Scene\SceneManager.h">
+      <Filter>01.Engine\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Camera.h">
+      <Filter>01.Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Input.h">
+      <Filter>01.Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Screen.h">
+      <Filter>01.Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Time.h">
+      <Filter>01.Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\TitleScene\TitleScene.h">
+      <Filter>Source\TitleScene</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\PlayScene\PlayScene.h">
+      <Filter>Source\PlayScene</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\MyLibrary\ButtonArea.h">
+      <Filter>Source\MyLibrary</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <FxCompile Include="Engine\Shader\Simple2D.hlsl">
+      <Filter>01.Engine\Shader</Filter>
+    </FxCompile>
+    <FxCompile Include="Engine\Shader\Simple3D.hlsl">
+      <Filter>01.Engine\Shader</Filter>
+    </FxCompile>
+  </ItemGroup>
+</Project>
