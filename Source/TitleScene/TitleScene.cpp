@@ -1,5 +1,7 @@
 #include "TitleScene.h"
+#include "../../Engine/Scene/SceneManager.h"
 #include "../../Engine/Data/Image.h"
+#include "../../Engine/Input.h"
 
 TitleScene::TitleScene()
 {
@@ -13,6 +15,10 @@ TitleScene::~TitleScene()
 
 void TitleScene::Update()
 {
+	if (Input::IsButtonDown("next"))
+	{
+		SceneManager::ChangeScene("PLAY");
+	}
 }
 
 void TitleScene::Draw()

@@ -29,6 +29,11 @@ namespace Input
 	InputActionMap_t inputActionMap;
 
 	const int KEY_MAX = 256; // キーボード入力の最大数
+	
+	// マウスの状態
+	const int MOUSE_LEFT = 0;
+	const int MOUSE_RIGHT = 1;
+	const int MOUSE_MIDDLE = 2;
 
 	LPDIRECTINPUT8 pDInput = nullptr;
 	LPDIRECTINPUTDEVICE8 pKeyDevice;	// デバイスオブジェクト・キーボード
@@ -60,7 +65,8 @@ void Input::InitActionMap()
 {
 	// ここに入力の処理内容をかく
 	inputActionMap["quit"] = { {INPUT_TYPE::KEYBOARD, DIK_ESCAPE} }; // 
-	inputActionMap["ok"] = { {INPUT_TYPE::KEYBOARD, DIK_SPACE}, {INPUT_TYPE::MOUSE, MOUSEEVENTF_LEFTDOWN} };
+	inputActionMap["ok"] = { {INPUT_TYPE::KEYBOARD, DIK_SPACE}, {INPUT_TYPE::MOUSE, MOUSE_LEFT} };
+	inputActionMap["next"] = { {INPUT_TYPE::KEYBOARD, DIK_N}, {INPUT_TYPE::MOUSE, MOUSE_RIGHT} };
 }
 
 float Input::GetAnalogValue(int raw, int max, int deadZone)

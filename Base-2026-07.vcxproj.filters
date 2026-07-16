@@ -33,9 +33,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Source\TestScene.cpp">
-      <Filter>Source</Filter>
-    </ClCompile>
     <ClCompile Include="Engine\Data\CsvReader.cpp">
       <Filter>01.Engine\Data</Filter>
     </ClCompile>
@@ -95,9 +92,6 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Source\TestScene.h">
-      <Filter>Source</Filter>
-    </ClInclude>
     <ClInclude Include="Engine\Data\CsvReader.h">
       <Filter>01.Engine\Data</Filter>
     </ClInclude>

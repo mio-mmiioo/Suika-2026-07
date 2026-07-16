@@ -8,4 +8,7 @@ public:
 	~PlayScene() override;
 	void Update() override;
 	void Draw() override;
+
+private:
+	int hBackground_;
 };
