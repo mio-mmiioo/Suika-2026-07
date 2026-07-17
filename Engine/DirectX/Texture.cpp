@@ -77,7 +77,7 @@ HRESULT Texture::Load(std::string fileName)
 	samplerDesc.AddressU = D3D11_TEXTURE_ADDRESS_CLAMP;
 	samplerDesc.AddressV = D3D11_TEXTURE_ADDRESS_CLAMP;
 	samplerDesc.AddressW = D3D11_TEXTURE_ADDRESS_CLAMP;
-	Direct3D::pDevice->CreateSamplerState(&samplerDesc, &pSampler_);
+	hr = Direct3D::pDevice->CreateSamplerState(&samplerDesc, &pSampler_);
 	if (FAILED(hr))
 	{
 		MessageBox(nullptr, L"Texture Load()：サンプラーの作成に失敗しました", L"エラー", MB_OK);
@@ -96,6 +96,7 @@ HRESULT Texture::Load(std::string fileName)
 		return hr;
 	}
 
+	SAFE_RELEASE(pTexture);
 	SAFE_RELEASE(pFormatConverter);
 	SAFE_RELEASE(pDecoder);
 	SAFE_RELEASE(pFrame);

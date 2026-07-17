@@ -94,7 +94,6 @@ void Sprite::DrawGraph(int x, int y, RECT rect, int width, int height, float rot
 void Sprite::Release()
 {
 	SAFE_RELEASE(pTexture_);
-	SAFE_DELETE(pTexture_);
 
 	SAFE_RELEASE(pBlendState_);
 	SAFE_RELEASE(pConstantBuffer_);
