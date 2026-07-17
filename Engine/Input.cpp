@@ -64,7 +64,7 @@ namespace Input
 void Input::InitActionMap()
 {
 	// ここに入力の処理内容をかく
-	inputActionMap["quit"] = { {INPUT_TYPE::KEYBOARD, DIK_ESCAPE} }; // 
+	inputActionMap["quit"] = { {INPUT_TYPE::KEYBOARD, DIK_ESCAPE} };
 	inputActionMap["ok"] = { {INPUT_TYPE::KEYBOARD, DIK_SPACE}, {INPUT_TYPE::MOUSE, MOUSE_LEFT} };
 	inputActionMap["next"] = { {INPUT_TYPE::KEYBOARD, DIK_N}, {INPUT_TYPE::MOUSE, MOUSE_RIGHT} };
 	inputActionMap["right"] = { {INPUT_TYPE::KEYBOARD, DIK_RIGHT} };

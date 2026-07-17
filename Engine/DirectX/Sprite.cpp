@@ -6,6 +6,7 @@ Sprite::Sprite()
 	:pVertexBuffer_(nullptr),
 	pIndexBuffer_(nullptr),
 	pConstantBuffer_(nullptr),
+	pBlendState_(nullptr),
 	pTexture_(nullptr)
 {
 	// ブレンドステートの作成
@@ -17,8 +18,8 @@ Sprite::Sprite()
 	blendDesc.RenderTarget[0].SrcBlend = D3D11_BLEND_SRC_ALPHA;
 	blendDesc.RenderTarget[0].DestBlend = D3D11_BLEND_INV_SRC_ALPHA;
 	blendDesc.RenderTarget[0].BlendOp = D3D11_BLEND_OP_ADD;
-	blendDesc.RenderTarget[0].SrcBlendAlpha = D3D11_BLEND_ONE;
-	blendDesc.RenderTarget[0].DestBlendAlpha = D3D11_BLEND_ZERO;
+	blendDesc.RenderTarget[0].SrcBlendAlpha = D3D11_BLEND_SRC_ALPHA;
+	blendDesc.RenderTarget[0].DestBlendAlpha = D3D11_BLEND_INV_SRC_ALPHA;
 	blendDesc.RenderTarget[0].BlendOpAlpha = D3D11_BLEND_OP_ADD;
 	blendDesc.RenderTarget[0].RenderTargetWriteMask = D3D11_COLOR_WRITE_ENABLE_ALL;
 	if (FAILED(Direct3D::pDevice->CreateBlendState(&blendDesc, &pBlendState_)))
@@ -66,11 +67,11 @@ void Sprite::DrawGraph(int x, int y, RECT rect, int width, int height, float rot
 	ID3D11ShaderResourceView* pSRV = pTexture_->GetSRV();
 	Direct3D::pContext->PSSetShaderResources(0, 1, &pSRV);
 
-	Direct3D::pContext->Unmap(pConstantBuffer_, 0); // 再開
-
-	float blendFactor[] = { 0.0f, 0.0f, 0.0f, 0.0f };
+	float blendFactor[] = { 1.0f, 1.0f, 1.0f, 1.0f };
 	UINT sampleMask = 0xffffffff;
 	Direct3D::pContext->OMSetBlendState(pBlendState_, blendFactor, sampleMask);
+
+	Direct3D::pContext->Unmap(pConstantBuffer_, 0); // 再開
 
 
 	// 頂点バッファ

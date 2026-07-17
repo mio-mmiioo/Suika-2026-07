@@ -8,6 +8,8 @@
 #include "Time.h"
 #include "Data/Sound.h"
 
+#include "../Source/Data.h"
+
 LRESULT CALLBACK WndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam);
 
 LPCTSTR WIN_CLASS_NAME = TEXT("SampleGame"); // ウィンドウクラス名
@@ -57,6 +59,7 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInst, LPSTR lpCmdLine, 
 	Sound::Initialize();
 	Input::Initialize(hWnd);
 	Time::Initialize(hWnd);
+	Data::Init();
 	ObjectManager::Init();
 	SceneManager::Init();
 	Camera::Initialize();

@@ -18,7 +18,7 @@ Texture::~Texture()
 
 HRESULT Texture::Load(std::string fileName)
 {
-	std::wstring wfileName(fileName.begin(), fileName.end());
+	std::wstring wFileName(fileName.begin(), fileName.end());
 	HRESULT hr;
 	
 	hr = CoInitialize(NULL);
@@ -27,10 +27,12 @@ HRESULT Texture::Load(std::string fileName)
 	IWICBitmapFrameDecode* pFrame = NULL;
 	IWICFormatConverter* pFormatConverter = NULL;
 	hr = CoCreateInstance(CLSID_WICImagingFactory, NULL, CLSCTX_INPROC_SERVER, IID_IWICImagingFactory, reinterpret_cast<void**>(&pFactory));
-	hr = pFactory->CreateDecoderFromFilename(wfileName.c_str(), NULL, GENERIC_READ, WICDecodeMetadataCacheOnDemand, &pDecoder);
+	hr = pFactory->CreateDecoderFromFilename(wFileName.c_str(), NULL, GENERIC_READ, WICDecodeMetadataCacheOnDemand, &pDecoder);
 	if (FAILED(hr))
 	{
-		MessageBox(nullptr, L"Texture Load()：ファイルの読み込みに失敗しました", L"エラー", MB_OK);
+		std::string message = "Texture Load()：" + fileName + "の読み込みに失敗しました";
+		std::wstring wMessage(message.begin(), message.end());
+		MessageBox(nullptr, wMessage.c_str(), L"エラー", MB_OK);
 		return hr;
 	}
 	pDecoder->GetFrame(0, &pFrame);

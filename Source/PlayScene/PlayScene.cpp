@@ -3,10 +3,11 @@
 #include "../../Engine/Scene/SceneManager.h"
 #include "../../Engine/Data/Image.h"
 #include "Player.h"
+#include "../Data.h"
 
 PlayScene::PlayScene()
 {
-	hBackground_ = Image::Load("background01.png");
+	hBackground_ = Data::image["background"];
 	player_ = new Player();
 }
 

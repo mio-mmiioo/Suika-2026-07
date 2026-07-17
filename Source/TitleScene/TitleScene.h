@@ -14,7 +14,6 @@ public:
 private:
 	Button* newStart_;				// はじめる
 	Area title_;					// タイトルの画像
-	std::string backgroundImage_;	// 背景
 	std::string bgm_;				// bgm
 	int hBackground_;
 };

@@ -1,0 +1,13 @@
+名前,左上のx座標,左上のy座標,右下のx座標,右下のy座標
+newStartNormal,300,450,500,550
+newStartSelect,300,450,500,550
+continueStartNormal,524,450,724,550
+continueStartSelect,524,450,724,550
+title,212,150,812,400
+endNormal,700,500,900,600
+endSelect,700,500,900,600
+box,150,100,550,600
+sinnkanowa,650,150,950,450
+score,650,50,950,100
+gameOver,650,200,950,400
+number,0,0,40,70

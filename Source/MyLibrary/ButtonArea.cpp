@@ -64,7 +64,7 @@ void Button::Update()
 {
 	isOnArea_ = false;
 
-	if (ButtonArea::IsMouseInArea(normal_) == true)
+	if (ButtonArea::IsMouseKeepInArea(normal_) == true)
 	{
 		isOnArea_ = true;
 	}

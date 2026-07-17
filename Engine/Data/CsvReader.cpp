@@ -5,7 +5,7 @@
 CsvReader::CsvReader(std::string fileName)
 {
 	all.clear();
-	std::ifstream ifs(fileName);
+	std::ifstream ifs( "Assets/data/" + fileName);
 	if (!ifs)
 	{
 		MessageBox(NULL, L"CsvReader CsvReader()：ファイルが開けませんでした", L"エラー", MB_OK);
