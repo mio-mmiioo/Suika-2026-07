@@ -54,6 +54,5 @@ VS_OUT VS(float4 pos : POSITION, float4 uv : TEXCOORD)
 // ピクセルシェーダー
 float4 PS(VS_OUT inData) : SV_Target
 {
-    //return float4(1.0f, 0.0f, 0.0f, 0.3f);
     return g_color * g_texture.Sample(g_sampler, inData.uv);
 }

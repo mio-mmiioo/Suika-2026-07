@@ -22,6 +22,8 @@ namespace Direct3D
 	};
 
 	SHADER_BUNDLE shaderBundle[MAX_SHADER_TYPE]; // シェーダー
+	ID3D11DepthStencilState* pDepthState2D;
+	ID3D11DepthStencilState* pDepthState3D;
 }
 
 HRESULT Direct3D::Initialize(int windowWidth, int windowHeight, HWND hWnd)
@@ -116,6 +118,24 @@ HRESULT Direct3D::Initialize(int windowWidth, int windowHeight, HWND hWnd)
 	if (FAILED(hr))
 	{
 		MessageBox(NULL, L"Direct3D Initialize()：深度ステンシルビューの作成に失敗しました", L"エラー", MB_OK);
+	}
+
+	D3D11_DEPTH_STENCIL_DESC depthStencilDesc = {};
+	depthStencilDesc.DepthEnable = FALSE;
+	depthStencilDesc.DepthWriteMask = D3D11_DEPTH_WRITE_MASK_ZERO;
+	depthStencilDesc.DepthFunc = D3D11_COMPARISON_ALWAYS;
+	hr = pDevice->CreateDepthStencilState(&depthStencilDesc, &pDepthState2D);
+	if (FAILED(hr))
+	{
+		MessageBox(NULL, L"Direct3D Initialize()：2Dのデプスステンシルステートの作成に失敗しました", L"エラー", MB_OK);
+		return hr;
+	}
+	depthStencilDesc.DepthEnable = TRUE;
+	hr = pDevice->CreateDepthStencilState(&depthStencilDesc, &pDepthState3D);
+	if (FAILED(hr))
+	{
+		MessageBox(NULL, L"Direct3D Initialize()：3Dのデプスステンシルステートの作成に失敗しました", L"エラー", MB_OK);
+		return hr;
 	}
 
 	// データを画面に描画するための一通りの設定( パイプライン )
@@ -250,6 +270,15 @@ void Direct3D::SetShader(SHADER_TYPE type)
 	pContext->PSSetShader(shaderBundle[type].pPixelShader, NULL, 0);
 	pContext->IASetInputLayout(shaderBundle[type].pVertexLayout);
 	pContext->RSSetState(shaderBundle[type].pRasterizerState);
+
+	if (type == SHADER_TYPE::SHADER_2D)
+	{
+		pContext->OMSetDepthStencilState(pDepthState2D, 0);
+	}
+	else if (type == SHADER_TYPE::SHADER_3D)
+	{
+		pContext->OMSetDepthStencilState(pDepthState3D, 0);
+	}
 }
 
 void Direct3D::BeginDraw()
@@ -276,6 +305,8 @@ void Direct3D::Release()
 		SAFE_RELEASE(shaderBundle[count].pVertexShader);
 	}
 
+	SAFE_RELEASE(pDepthStencilView);
+	SAFE_RELEASE(pDepthStencil);
 	SAFE_RELEASE(pRenderTargetView);
 	SAFE_RELEASE(pSwapChain);
 	SAFE_RELEASE(pContext);

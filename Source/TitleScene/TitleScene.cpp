@@ -13,6 +13,7 @@ TitleScene::TitleScene()
 
 	title_ = Data::areaList["title"];
 	hBackground_ = Data::image["background"];
+	hItigo_ = Data::image["itigo"];
 }
 
 TitleScene::~TitleScene()
@@ -43,7 +44,10 @@ void TitleScene::Update()
 
 void TitleScene::Draw()
 {
-	//Image::DrawGraph(0, 0, hBackground_);
+	Image::DrawGraph(0, 0, hBackground_);
+	Image::DrawGraph(200, 200, hItigo_);
+	Image::DrawGraph(100, 100, title_.hImage);
+	
 	//ButtonArea::DrawArea(title_);
-	newStart_->Draw();
+	//newStart_->Draw();
 }
