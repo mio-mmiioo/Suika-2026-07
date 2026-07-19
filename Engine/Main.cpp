@@ -101,9 +101,9 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInst, LPSTR lpCmdLine, 
 	}
 
 	Input::Release();
+	SceneManager::Relase();
 	ObjectManager::Release();
 	Sound::Release();
-	SceneManager::Relase();
 	Direct3D::Release();
 
 	return 0;

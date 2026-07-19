@@ -172,6 +172,8 @@
     <ClCompile Include="Engine\Time.cpp" />
     <ClCompile Include="Source\Data.cpp" />
     <ClCompile Include="Source\MyLibrary\ButtonArea.cpp" />
+    <ClCompile Include="Source\PlayScene\Fruit.cpp" />
+    <ClCompile Include="Source\PlayScene\GameMaster.cpp" />
     <ClCompile Include="Source\PlayScene\Player.cpp" />
     <ClCompile Include="Source\PlayScene\PlayScene.cpp" />
     <ClCompile Include="Source\TitleScene\TitleScene.cpp" />
@@ -198,6 +200,8 @@
     <ClInclude Include="Source\Data.h" />
     <ClInclude Include="Source\MyLibrary\ButtonArea.h" />
     <ClInclude Include="Source\MyLibrary\MyStruct.h" />
+    <ClInclude Include="Source\PlayScene\Fruit.h" />
+    <ClInclude Include="Source\PlayScene\GameMaster.h" />
     <ClInclude Include="Source\PlayScene\Player.h" />
     <ClInclude Include="Source\PlayScene\PlayScene.h" />
     <ClInclude Include="Source\TitleScene\TitleScene.h" />

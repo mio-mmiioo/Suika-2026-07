@@ -4,7 +4,7 @@
 
 namespace Direct3D
 {
-	float BACKGROUND_COLOR[4] = { 0.0f, 0.0f, 0.0f, 1.0f }; // 背景の色　R,G,B,A
+	float BACKGROUND_COLOR[4] = { 1.0f, 1.0f, 1.0f, 1.0f }; // 背景の色　R,G,B,A
 
 	ID3D11Device*			pDevice;			// デバイス
 	ID3D11DeviceContext*	pContext;			// デバイスコンテキスト

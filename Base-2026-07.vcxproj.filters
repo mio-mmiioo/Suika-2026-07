@@ -96,6 +96,12 @@
     <ClCompile Include="Source\Data.cpp">
       <Filter>Source</Filter>
     </ClCompile>
+    <ClCompile Include="Source\PlayScene\GameMaster.cpp">
+      <Filter>Source\PlayScene</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\PlayScene\Fruit.cpp">
+      <Filter>Source\PlayScene</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\Data\CsvReader.h">
@@ -169,6 +175,12 @@
     </ClInclude>
     <ClInclude Include="Source\Data.h">
       <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\PlayScene\GameMaster.h">
+      <Filter>Source\PlayScene</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\PlayScene\Fruit.h">
+      <Filter>Source\PlayScene</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

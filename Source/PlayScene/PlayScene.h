@@ -1,6 +1,7 @@
 #pragma once
 #include "../../Engine/Scene/Scene.h"
 
+class Button;
 class Player;
 
 class PlayScene : public Scene
@@ -14,4 +15,5 @@ public:
 private:
 	int hBackground_;
 	Player* player_;
+	Button* end_; // ゲーム終了ボタン
 };

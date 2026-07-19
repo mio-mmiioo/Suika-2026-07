@@ -45,9 +45,6 @@ void TitleScene::Update()
 void TitleScene::Draw()
 {
 	Image::DrawGraph(0, 0, hBackground_);
-	Image::DrawGraph(200, 200, hItigo_);
-	Image::DrawGraph(100, 100, title_.hImage);
-	
-	//ButtonArea::DrawArea(title_);
-	//newStart_->Draw();
+	ButtonArea::DrawArea(title_);
+	newStart_->Draw();
 }

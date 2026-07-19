@@ -4,6 +4,17 @@
 
 namespace Data
 {
+	// fruitDataListのcsvデータで、各カラムに入っている情報
+	enum FRUIT_DATA_NUM
+	{
+		NUMBER,
+		NAME,
+		DISTANCE_R,
+		SCORE,
+		MAX_FRUIT_DATA_NUM
+	};
+
+	// areaListのcsvデータで、各カラムに入っている情報
 	enum AREA_LIST_NUM
 	{
 		AREA_NAME,
@@ -14,19 +25,26 @@ namespace Data
 		MAX_AREA_LIST_NUM
 	};
 
+
+
 	const int CSV_DATA_START_LINE = 1; // csvデータの読み込みを開始する位置　※一番上は、補足に使用する
 
+	std::map<FRUIT_TYPE, FruitData> fruitDataList; // フルーツのデータリスト
 	std::map<std::string, Area> areaList; // areaの位置リスト
 	std::map<std::string, int> image; // 画像のリスト
 
 	void InitImage(); // 画像の初期化
+	void InitFruitDataList(); // fruitDataListの初期化
 	void InitAreaList(); // areaの位置リストの初期化
+
+	FRUIT_TYPE NumberToFruitType(int number);
 }
 
 void Data::Init()
 {
 	InitImage();
 	InitAreaList();
+	InitFruitDataList();
 }
 
 void Data::InitImage()
@@ -70,6 +88,23 @@ void Data::InitImage()
 	}
 }
 
+void Data::InitFruitDataList()
+{
+	CsvReader* csv = new CsvReader("fruitDataList.csv");
+	FruitData current; // 確認中の果物
+	std::string name = "";
+	for (int line = CSV_DATA_START_LINE; line < csv->GetLines(); line++)
+	{
+		name = csv->GetString(line, FRUIT_DATA_NUM::NAME);
+		current.distanceR = csv->GetFloat(line, FRUIT_DATA_NUM::DISTANCE_R);
+		current.score = csv->GetInt(line, FRUIT_DATA_NUM::SCORE);
+		current.image = image[name];
+		current.type = NumberToFruitType(csv->GetInt(line, FRUIT_DATA_NUM::NUMBER));
+		fruitDataList[current.type] = current;
+	}
+	delete csv;
+}
+
 void Data::InitAreaList()
 {
 	CsvReader* csv = new CsvReader("areaList.csv");
@@ -85,5 +120,37 @@ void Data::InitAreaList()
 		current.rightDownY	= csv->GetInt(line, AREA_LIST_NUM::RIGHT_DOWN_Y);
 		areaList[name] = current;
 	}
+	delete csv;
+}
+
+Data::FRUIT_TYPE Data::NumberToFruitType(int number)
+{
+	switch (number)
+	{
+	case 0:
+		return FRUIT_TYPE::SAKURANNBO;
+	case 1:
+		return FRUIT_TYPE::ITIGO;
+	case 2:
+		return FRUIT_TYPE::BUDOU;
+	case 3:
+		return FRUIT_TYPE::ORENNJI;
+	case 4:
+		return FRUIT_TYPE::MIKANN;
+	case 5:
+		return FRUIT_TYPE::RINNGO;
+	case 6:
+		return FRUIT_TYPE::NASI;
+	case 7:
+		return FRUIT_TYPE::MOMO;
+	case 8:
+		return FRUIT_TYPE::PAINAPPURU;
+	case 9:
+		return FRUIT_TYPE::MERONN;
+	case 10:
+		return FRUIT_TYPE::SUIKA;
+	}
+	// 見つからなかった
+	return FRUIT_TYPE::MAX_FRUIT_TYPE;
 }
 

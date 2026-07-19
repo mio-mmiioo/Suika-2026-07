@@ -31,19 +31,18 @@ void Player::Update()
 	}
 
 	// 位置補正
-	if (fruitPosition_.x < 100.0f)
+	if (fruitPosition_.x < Data::areaList["box"].leftTopX)
 	{
-		fruitPosition_.x = 100.0f;
+		fruitPosition_.x = Data::areaList["box"].leftTopX;
 	}
-	else if (fruitPosition_.x > 924.0f)
+	else if (fruitPosition_.x > Data::areaList["box"].rightDownX)
 	{
-		fruitPosition_.x = 924.0f;
+		fruitPosition_.x = Data::areaList["box"].rightDownX;
 	}
 
 }
 
 void Player::Draw()
 {
-	//Image::DrawGraph((int)fruitPosition_.x, (int)fruitPosition_.y, hFruitImage_);
 	Image::DrawExtendGraph((int)fruitPosition_.x, (int)fruitPosition_.y, 100, 100, hFruitImage_);
 }
