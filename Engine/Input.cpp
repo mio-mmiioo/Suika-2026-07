@@ -69,6 +69,8 @@ void Input::InitActionMap()
 	inputActionMap["next"] = { {INPUT_TYPE::KEYBOARD, DIK_N}, {INPUT_TYPE::MOUSE, MOUSE_RIGHT} };
 	inputActionMap["right"] = { {INPUT_TYPE::KEYBOARD, DIK_RIGHT} };
 	inputActionMap["left"] = { {INPUT_TYPE::KEYBOARD, DIK_LEFT} };
+
+	inputActionMap["put"] = { {INPUT_TYPE::KEYBOARD, DIK_SPACE}, {INPUT_TYPE::MOUSE, MOUSE_LEFT} };
 }
 
 float Input::GetAnalogValue(int raw, int max, int deadZone)

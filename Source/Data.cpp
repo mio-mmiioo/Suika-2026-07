@@ -36,8 +36,6 @@ namespace Data
 	void InitImage(); // 画像の初期化
 	void InitFruitDataList(); // fruitDataListの初期化
 	void InitAreaList(); // areaの位置リストの初期化
-
-	FRUIT_TYPE NumberToFruitType(int number);
 }
 
 void Data::Init()

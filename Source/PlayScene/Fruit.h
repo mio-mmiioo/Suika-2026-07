@@ -30,8 +30,11 @@ public:
 	void SetPosition(Point p) { position_ = p; }
 
 private:
-	Data::FruitData fruitData_;
-	Point position_;
+	Data::FruitData fruitData_; // フルーツのデータ
+	Point position_; // 位置
+
+	bool isOnGround_; // 箱の底にいるならtrue
+	Point velocity_; // 加わっている力
 
 	float angle_;
 };

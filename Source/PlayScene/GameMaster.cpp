@@ -3,17 +3,24 @@
 #include "../Data.h"
 #include "Fruit.h"
 
-namespace
+#include <list>
+
+namespace GameMaster
 {
+	/// <summary>
+	/// フルーツリストから指定したfruitを削除する
+	/// </summary>
+	/// <param name="fruit">Fruitのインスタンス</param>
+	void DeleteFruit(Fruit* fruit);
+
+	std::list<Fruit*> allFruitList; // 箱内にあるすべてのフルーツのリスト
+	std::list<Fruit*> deleteFruitList; // 削除予定のフルーツリスト
 	Area box; // 果物を入れる箱
-	Fruit* fruit;
 }
 
 void GameMaster::Init()
 {
 	box = Data::areaList["box"];
-	Point p = { 100.0f, 100.0f };
-	fruit = new Fruit(Data::FRUIT_TYPE::ITIGO, p);
 }
 
 void GameMaster::Update()
@@ -28,5 +35,39 @@ void GameMaster::Draw()
 
 void GameMaster::Release()
 {
-	delete fruit;
+	for (auto itr = allFruitList.begin(); itr != allFruitList.end(); itr++)
+	{
+		(*itr)->DestroyMe();
+		*itr = nullptr;
+	}
+	allFruitList.clear();
+}
+
+void GameMaster::AddFruit(Fruit* fruit)
+{
+	if (fruit != nullptr)
+	{
+		allFruitList.push_back(fruit);
+	}
+}
+
+void GameMaster::FruitCheckPosition()
+{
+}
+
+bool GameMaster::FruitCheckBoxPosition(Fruit* fruit)
+{
+	return false;
+}
+
+void GameMaster::DeleteFruit(Fruit* fruit)
+{
+	for (auto itr = allFruitList.begin(); itr != allFruitList.end(); itr++)
+	{
+		if (*itr == fruit)
+		{
+			*itr = nullptr;
+		}
+		allFruitList.remove(nullptr);
+	}
 }

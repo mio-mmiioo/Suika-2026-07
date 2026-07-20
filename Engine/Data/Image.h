@@ -47,6 +47,7 @@ namespace Image
 	
 	/// <summary>
 	/// 拡縮した画像を回転表示
+	/// x,yは回転の中心座標
 	/// </summary>
 	/// <param name="x">スクリーンのx座標</param>
 	/// <param name="y">スクリーンのy座標</param>

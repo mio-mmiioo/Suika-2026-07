@@ -33,6 +33,7 @@ namespace Data
 	};
 
 	void Init(); // 初期化
+	FRUIT_TYPE NumberToFruitType(int number);
 
 	extern std::map<FRUIT_TYPE, FruitData> fruitDataList; // フルーツのデータリスト
 	extern std::map<std::string, Area> areaList; // Areaの位置リスト
