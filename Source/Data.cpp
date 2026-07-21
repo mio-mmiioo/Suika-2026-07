@@ -26,15 +26,26 @@ namespace Data
 	};
 
 
+	enum FRUIT_PHYSICS_DATA_NUM
+	{
+		FRUIT_PHYSICS_DATA_NAME,
+		FRUIT_PHYSICS_DATA_NUM,
+		MAX_FRUIT_PHYSICS_DATA_NUM
+
+	};
+
+
 
 	const int CSV_DATA_START_LINE = 1; // csvデータの読み込みを開始する位置　※一番上は、補足に使用する
 
 	std::map<FRUIT_TYPE, FruitData> fruitDataList; // フルーツのデータリスト
+	std::map<std::string, float> fruitPhysics;	// フルーツの物理計算に使用する数値
 	std::map<std::string, Area> areaList; // areaの位置リスト
 	std::map<std::string, int> image; // 画像のリスト
 
 	void InitImage(); // 画像の初期化
 	void InitFruitDataList(); // fruitDataListの初期化
+	void InitFruitPhysics(); // 物理演算に使用する数値の初期化
 	void InitAreaList(); // areaの位置リストの初期化
 }
 
@@ -43,6 +54,7 @@ void Data::Init()
 	InitImage();
 	InitAreaList();
 	InitFruitDataList();
+	InitFruitPhysics();
 }
 
 void Data::InitImage()
@@ -99,6 +111,18 @@ void Data::InitFruitDataList()
 		current.image = image[name];
 		current.type = NumberToFruitType(csv->GetInt(line, FRUIT_DATA_NUM::NUMBER));
 		fruitDataList[current.type] = current;
+	}
+	delete csv;
+}
+
+void Data::InitFruitPhysics()
+{
+	CsvReader* csv = new CsvReader("fruitPhysics.csv");
+	std::string name = "";
+	for (int line = CSV_DATA_START_LINE; line < csv->GetLines(); line++)
+	{
+		name = csv->GetString(line, FRUIT_PHYSICS_DATA_NAME);
+		fruitPhysics[name] = csv->GetFloat(line, FRUIT_PHYSICS_DATA_NUM);
 	}
 	delete csv;
 }

@@ -36,6 +36,7 @@ namespace Data
 	FRUIT_TYPE NumberToFruitType(int number);
 
 	extern std::map<FRUIT_TYPE, FruitData> fruitDataList; // フルーツのデータリスト
+	extern std::map<std::string, float> fruitPhysics;	// フルーツの物理計算に使用する数値
 	extern std::map<std::string, Area> areaList; // Areaの位置リスト
 	extern std::map<std::string, int> image; // 画像のリスト
 }

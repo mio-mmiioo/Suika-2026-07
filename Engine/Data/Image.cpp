@@ -1,5 +1,6 @@
 #include "Image.h"
 #include <vector>
+#include <algorithm>
 
 namespace Image
 {
@@ -87,7 +88,9 @@ void Image::DrawExtendRotateGraph(int x, int y, int width, int height, float rot
 	rect.top = (LONG)0;
 	rect.right = (LONG)GetGraphSize(hImage).x;
 	rect.bottom = (LONG)GetGraphSize(hImage).y;
-	imageList[hImage]->pSprite->DrawGraph(x, y, rect, width, height, rotate, DEFAULT_ALPHA);
+	float rotation = rotate * DirectX::XM_PI / 180.0f;
+	//rotation = std::clamp(rotation, 0.0f, 1.0f);
+	imageList[hImage]->pSprite->DrawGraph(x, y, rect, width, height, rotate * DirectX::XM_PI / 180.0f, DEFAULT_ALPHA);
 }
 
 DirectX::XMFLOAT2 Image::GetGraphSize(int hImage)

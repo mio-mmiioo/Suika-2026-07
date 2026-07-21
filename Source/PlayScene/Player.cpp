@@ -77,7 +77,6 @@ void Player::Draw()
 	int width = (int)fruitData_.distanceR * 2;
 	int height = (int)fruitData_.distanceR * 2;
 	Image::DrawExtendGraph((int)(fruitPosition_.x - fruitData_.distanceR), (int)(fruitPosition_.y - fruitData_.distanceR), width, height, fruitData_.image);
-	//Image::DrawExtendGraph((int)fruitPosition_.x, (int)fruitPosition_.y, width, height, fruitData_.image);
 }
 
 void Player::CreateFruitType()

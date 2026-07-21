@@ -1,0 +1,14 @@
+﻿データ名,データの値,データの補足説明
+supportCountMin,2,フルーツを支えるのに必要なフルーツの最小個数
+maxAdjustCheckPosition,3,位置調整を繰り返す回数
+maxSleepCount,20,スリープ状態に入るまでのカウント
+slopeStagleLimitY,0.8,法線ベクトルのy成分によって上に載っているかを調べるしきい値
+minOverLap,0.1,押し戻しをスキップしない最小値
+collisionRaitio,0.5,衝突後に押す割合
+fruitRollPower,0.02,フルーツが横に転がる強さ
+positionOffset,0.1,0除算を回避するための微小な値
+wakeUpVelocity,0.5,フルーツのWakeUp()を呼び出す判断をする値
+groundFriction,0.9,地面での摩擦係数
+airResistance,0.96,空中での抵抗
+sleepLimitSq,0.4,動いていないとみなす、速度の二乗の値
+gravity,0.6,重力
