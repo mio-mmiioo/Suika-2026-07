@@ -45,7 +45,7 @@ int Sound::Load(const std::string& name)
 	{
 		return -1;
 	}
-	std::filesystem::path path = "Assets/sound/" + name;
+	std::filesystem::path path = "Assets/sound/" + name + ".wav";
 	std::wstring wPath = path.wstring();
 	sounds[name] = std::make_unique<DirectX::SoundEffect>(audioEngine.get(), wPath.c_str());
 	return 0;

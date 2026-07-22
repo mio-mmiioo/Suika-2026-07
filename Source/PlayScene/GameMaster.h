@@ -5,7 +5,13 @@ class Fruit;
 namespace GameMaster
 {
 	void Init();	// 初期化
-	void Update();	// 更新処理
+	
+	/// <summary>
+	/// 更新処理
+	/// </summary>
+	/// <returns>ゲームオーバーだと1、成功したなら0が返る</returns>
+	int Update();
+
 	void Draw();	// 描画処理
 	void Release();	// 解放処理
 

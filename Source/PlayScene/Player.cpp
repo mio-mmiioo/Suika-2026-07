@@ -2,6 +2,7 @@
 #include "../../Engine/Data/Image.h"
 #include "../../Engine/Input.h"
 #include "../../Engine/Time.h"
+#include "../../Engine/Data/CsvReader.h"
 #include "Fruit.h"
 
 namespace PLAYER
@@ -14,7 +15,20 @@ namespace PLAYER
 Player::Player()
 {
 	fruitPosition_ = PLAYER::INIT_FRUIT_POSITION;
-	coolDownTimer_ = 0.0f;
+	
+	// フルーツの出現率をセット
+	{
+		fruitAppearanceRate_.clear();
+		CsvReader* csv = new CsvReader("fruitAppearanceRate.csv");
+		int rate = 0;
+		for (int line = 0; line < csv->GetLines(); line++)
+		{
+			rate = csv->GetInt(line, APPEARANCE_RATE_RATE);
+			fruitAppearanceRate_.push_back(rate);
+		}
+		delete csv;
+	}
+
 	fruitType_ = Data::FRUIT_TYPE::MAX_FRUIT_TYPE;
 	CreateFruitType(); // fruitType_に最初に置くフルーツの種類をセット
 	fruitData_ = Data::fruitDataList[fruitType_];
@@ -37,19 +51,20 @@ void Player::Update()
 		return;
 	}
 
+	// フルーツの位置をセット
 	if (Input::GetMousePosition().x != Input::GetPrevMousePosition().x)
 	{
 		fruitPosition_.x = Input::GetMousePosition().x;
 	}
 
-	if (Input::IsButtonKeepDown("right") == true)
-	{
-		fruitPosition_.x += Time::GetDeltaTime() * PLAYER::MOVE_SPEED;
-	}
-	if (Input::IsButtonKeepDown("left") == true)
-	{
-		fruitPosition_.x -= Time::GetDeltaTime() * PLAYER::MOVE_SPEED;
-	}
+	//if (Input::IsButtonKeepDown("right") == true)
+	//{
+	//	fruitPosition_.x += Time::GetDeltaTime() * PLAYER::MOVE_SPEED;
+	//}
+	//if (Input::IsButtonKeepDown("left") == true)
+	//{
+	//	fruitPosition_.x -= Time::GetDeltaTime() * PLAYER::MOVE_SPEED;
+	//}
 
 	// 位置補正
 	if (fruitPosition_.x < Data::areaList["box"].leftTopX + fruitData_.distanceR)
@@ -64,6 +79,7 @@ void Player::Update()
 	if (Input::IsButtonDown("put") && coolDownTimer_ <= 0.0f)
 	{
 		new Fruit(fruitType_, fruitPosition_);
+		Sound::Play("putFruit", false);
 		CreateFruitType();
 		fruitData_ = Data::fruitDataList[fruitType_];
 
@@ -81,8 +97,17 @@ void Player::Draw()
 
 void Player::CreateFruitType()
 {
-	// 確率が単純
-	// 出現率に偏りをだすのは後
-	int number = rand() % 4;
-	fruitType_ = Data::NumberToFruitType(number);
+	// 得点が低いものほど出現率を高めにするための処理
+	// 少しずつ値を加算して確認していく
+	int number = rand() % 100;
+	int rate =0;
+	for (int typeNumber = 0; typeNumber < fruitAppearanceRate_.size(); typeNumber++)
+	{
+		rate += fruitAppearanceRate_[typeNumber];
+		if (number < rate)
+		{
+			fruitType_ = Data::NumberToFruitType(typeNumber);
+			break;
+		}
+	}
 }

@@ -8,11 +8,26 @@
 
 namespace GameMaster
 {
+	const int MAX_SCORE_DIGITS = 7; // スコアの桁数
+
 	/// <summary>
 	/// フルーツリストから指定したfruitを削除する
 	/// </summary>
 	/// <param name="fruit">Fruitのインスタンス</param>
 	void DeleteFruit(Fruit* fruit);
+
+	/// <summary>
+	/// ゲームオーバーになっていないか調べる
+	/// </summary>
+	/// <returns>ゲームオーバーならtrue</returns>
+	bool IsCheckGameOver();
+
+	/// <summary>
+	/// 指定したフルーツがゲームオーバーに当てはまっていないか調べる
+	/// </summary>
+	/// <param name="fruit">確認したいフルーツのインスタンス</param>
+	/// <returns>ゲームオーバーならtrue</returns>
+	bool IsFruitCheckGameOver(Fruit* fruit);
 
 	/// <summary>
 	/// 指定したフルーツの進化した次のフルーツを取得する
@@ -21,32 +36,86 @@ namespace GameMaster
 	/// <returns>進化後のフルーツの種類</returns>
 	Data::FRUIT_TYPE GetNextType(Data::FRUIT_TYPE type);
 
-	std::list<Fruit*> allFruitList; // 箱内にあるすべてのフルーツのリスト
-	std::list<Fruit*> deleteFruitList; // 削除予定のフルーツリスト
-	Area box; // 果物を入れる箱
+	std::list<Fruit*> allFruitList;		// 箱内にあるすべてのフルーツのリスト
+	std::list<Fruit*> deleteFruitList;	// 削除予定のフルーツリスト
+
+	bool isCheckGameOver;	// ゲームオーバーの可能性があるならtrue
+	Area box;				// 果物を入れる箱
+	Area sinnkanowa;		// フルーツの進化を表す図
+	Area score;				// 得点を表示する範囲
+	int scoreNumWidth;		// 得点の1つの数字の横幅
+	int scoreNumHeight;		// 得点の一つの数字の縦幅
+
+	std::string hBgm;
 }
 
 void GameMaster::Init()
 {
 	box = Data::areaList["box"];
+	sinnkanowa = Data::areaList["sinnkanowa"];
+	score = Data::areaList["score"];
+	Area number = Data::areaList["number"];
+	scoreNumWidth = number.rightDownX - number.leftTopX;
+	scoreNumHeight = number.rightDownY - number.leftTopY;
+	hBgm = "bgm01";
+	Sound::Play(hBgm, true);
+
+	isCheckGameOver = false;
 }
 
-void GameMaster::Update()
+int GameMaster::Update()
 {
 	// 複数回計算をして、位置を整える
 	for (int adjustCount = 0; adjustCount < (int)Data::fruitPhysics["maxAdjustCheckPosition"]; adjustCount++)
 	{
 		FruitCheckPosition();
+
+		if (isCheckGameOver == true)
+		{
+			if (IsCheckGameOver() == true)
+			{
+				// ゲームオーバーなら
+				Sound::Stop(hBgm);
+				return 1;
+			}
+		}
 	}
+	return 0;
 }
 
 void GameMaster::Draw()
 {
+	ButtonArea::DrawArea(score);
+
+	// スコアの表示
+	{
+		int x = score.rightDownX;
+		int y = score.leftTopY;
+		int score = 123456;
+		int digit[MAX_SCORE_DIGITS];
+
+		// 桁の数字を代入
+		for (int count = MAX_SCORE_DIGITS - 1; count >= 0; count--)
+		{
+			digit[count] = score % 10;
+			score = score / 10;
+		}
+		std::string name;
+		// 数字を確認して、画像を表示
+		for (int count = MAX_SCORE_DIGITS - 1; count >= 0; count--)
+		{
+			name = std::to_string(digit[MAX_SCORE_DIGITS - 1 - count]);
+			Image::DrawExtendGraph(x - (count + 1) * scoreNumWidth, y, scoreNumWidth, scoreNumHeight, Data::image[name]);
+		}
+	}
+
 	ButtonArea::DrawArea(box);
+	ButtonArea::DrawArea(sinnkanowa);
 }
 
 void GameMaster::Release()
 {
+	Sound::Stop(hBgm);
 	for (auto itr = allFruitList.begin(); itr != allFruitList.end(); itr++)
 	{
 		(*itr)->DestroyMe();
@@ -96,6 +165,8 @@ void GameMaster::FruitCheckPosition()
 		if (box.leftTopX >= pos1.x || box.rightDownX <= pos1.x)
 		{
 			// ゲームオーバーのフラグを立てる
+			isCheckGameOver = true;
+			IsFruitCheckGameOver(fruitA);
 		}
 
 		for (auto itr2 = std::next(itr1); itr2 != allFruitList.end(); itr2++)
@@ -129,6 +200,8 @@ void GameMaster::FruitCheckPosition()
 					{
 						Point p = { (pos1.x + pos2.x) / 2 + Data::fruitPhysics["positionOffset"], (pos1.y + pos2.y) / 2 };
 						new Fruit(type, p);
+
+						Sound::Play("createFruit", false); // 生成音を鳴らす
 
 						// ここで削除するとアクセスエラーなど多々問題があるため、削除リストに追加
 						deleteFruitList.push_back(fruitA);
@@ -247,6 +320,71 @@ void GameMaster::DeleteFruit(Fruit* fruit)
 			*itr = nullptr;
 		}
 	}
+}
+
+bool GameMaster::IsCheckGameOver()
+{
+	bool ret = false;
+	Fruit* fruit = nullptr;
+	//Fruit* overFruit = nullptr;
+
+	// 箱の外に出ていないかを確認する
+	for (auto itr = allFruitList.begin(); itr != allFruitList.end(); itr++)
+	{
+		fruit = *itr;
+		// フルーツがゲームオーバーなら
+		if (IsFruitCheckGameOver(fruit) == true)
+		{
+			ret = true;
+			Point p = fruit->GetPosition();
+
+			// 箱のふちと確認し、横にずらす
+			// これがないと、箱に重なりながら落ちてしまう
+			if (p.x <= box.leftTopX)
+			{
+				p.x = box.leftTopX - fruit->GetFruitData().distanceR; // 左側に落とす
+			}
+			else
+			{
+				p.x = box.rightDownX - fruit->GetFruitData().distanceR; // 右側に落とす
+			}
+		}
+		else
+		{
+			FruitCheckBoxPosition(fruit);
+		}
+	}
+
+	// ゲームオーバーの場合
+	if (ret == true)
+	{
+		for (auto itr = allFruitList.begin(); itr != allFruitList.end(); itr++)
+		{
+			// ゲームオーバーの原因になったフルーツ以外はスリープさせる
+			if (!(fruit == (*itr)))
+			{
+				(*itr)->SetSleep();
+			}
+		}
+	}
+	return ret;
+}
+
+bool GameMaster::IsFruitCheckGameOver(Fruit* fruit)
+{
+	bool ret = false;
+	Point p = fruit->GetPosition();
+	// 箱の外に出ているかを確認
+	if (p.x < box.leftTopX || p.x > box.rightDownX)
+	{
+		if (p.y - fruit->GetFruitData().distanceR < box.leftTopY)
+		{
+			// 箱の外に出ているため、ゲームオーバーの処理
+			ret = true;
+			fruit->SetIsGameOverFruit();
+		}
+	}
+	return ret;
 }
 
 Data::FRUIT_TYPE GameMaster::GetNextType(Data::FRUIT_TYPE type)

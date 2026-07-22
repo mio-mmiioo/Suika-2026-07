@@ -38,20 +38,23 @@ namespace Data
 
 	const int CSV_DATA_START_LINE = 1; // csvデータの読み込みを開始する位置　※一番上は、補足に使用する
 
-	std::map<FRUIT_TYPE, FruitData> fruitDataList; // フルーツのデータリスト
-	std::map<std::string, float> fruitPhysics;	// フルーツの物理計算に使用する数値
-	std::map<std::string, Area> areaList; // areaの位置リスト
+	std::map<FRUIT_TYPE, FruitData> fruitDataList;	// フルーツのデータリスト
+	std::map<std::string, float> fruitPhysics;		// フルーツの物理計算に使用する数値
+	std::map<std::string, Area> areaList;			// areaの位置リスト
 	std::map<std::string, int> image; // 画像のリスト
+	std::map<std::string, int> sound; // 音源のリスト
 
 	void InitImage(); // 画像の初期化
-	void InitFruitDataList(); // fruitDataListの初期化
-	void InitFruitPhysics(); // 物理演算に使用する数値の初期化
-	void InitAreaList(); // areaの位置リストの初期化
+	void InitSound(); // 音源の初期化
+	void InitFruitDataList();	// fruitDataListの初期化
+	void InitFruitPhysics();	// 物理演算に使用する数値の初期化
+	void InitAreaList();		// areaの位置リストの初期化
 }
 
 void Data::Init()
 {
 	InitImage();
+	InitSound();
 	InitAreaList();
 	InitFruitDataList();
 	InitFruitPhysics();
@@ -82,7 +85,7 @@ void Data::InitImage()
 	image["sinnkanowa"] = Image::Load("sinnkanowa.png");	// 進化の輪　この順番に大きくなると示す画像
 
 	// ボタンの画像
-	image["newStartNormal"]			= Image::Load("newStartNormal.png");		// 新しくはじめる
+	image["newStartNormal"]			= Image::Load("newStartNormal.png");	// 新しくはじめる
 	image["newStartSelect"]			= Image::Load("newStartSelect.png");
 	image["continueStartNormal"]	= Image::Load("continueStartNormal.png");	// 続きからはじめる
 	image["continueStartSelect"]	= Image::Load("continueStartSelect.png");
@@ -96,6 +99,20 @@ void Data::InitImage()
 		name = std::to_string(count);
 		image[name] = Image::Load(name + ".png");
 	}
+}
+
+void Data::InitSound()
+{
+	// SE
+	Sound::Load("putFruit");		// フルーツを置くとき
+	Sound::Load("createFruit");		// フルーツが成長するとき
+	Sound::Load("gameOverFruit");	// ゲームオーバーの原因となったフルーツの落下音
+	Sound::Load("select");			// 選択音
+	Sound::Load("decide");			// 決定音
+
+	// bgm
+	Sound::Load("bgm01");
+	Sound::Load("bgm02");
 }
 
 void Data::InitFruitDataList()

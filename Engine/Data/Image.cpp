@@ -59,8 +59,9 @@ void Image::DrawGraph(int x, int y, Rect rect, int width, int height, int hImage
 
 void Image::DrawGraph(int x, int y, int hImage)
 {
-	int width = (int)GetGraphSize(hImage).x;
-	int height = (int)GetGraphSize(hImage).y;
+	int width;
+	int height;
+	GetGraphSize(hImage, &width, &height);
 	RECT rect;
 	rect.left = (LONG)0;
 	rect.top = (LONG)0;
@@ -71,31 +72,38 @@ void Image::DrawGraph(int x, int y, int hImage)
 
 void Image::DrawExtendGraph(int x, int y, int width, int height, int hImage)
 {
+	int imageWidth;
+	int imageHeight;
+	GetGraphSize(hImage, &imageWidth, &imageHeight);
+
 	// 切り抜くわけではないので、元の画像サイズを取得
 	RECT rect;
 	rect.left = (LONG)0;
 	rect.top = (LONG)0;
-	rect.right = (LONG)GetGraphSize(hImage).x;
-	rect.bottom = (LONG)GetGraphSize(hImage).y;
+	rect.right = (LONG)imageWidth;
+	rect.bottom = (LONG)imageHeight;
 	imageList[hImage]->pSprite->DrawGraph(x, y, rect, width, height, DEFAULT_ROTATE, DEFAULT_ALPHA);
 }
 
 void Image::DrawExtendRotateGraph(int x, int y, int width, int height, float rotate, int hImage)
 {
-	// 切り抜くわけではないので、元の画像サイズを取得
+	int imageWidth;
+	int imageHeight;
+	GetGraphSize(hImage, &imageWidth, &imageHeight);
 	RECT rect;
 	rect.left = (LONG)0;
 	rect.top = (LONG)0;
-	rect.right = (LONG)GetGraphSize(hImage).x;
-	rect.bottom = (LONG)GetGraphSize(hImage).y;
+	rect.right = (LONG)imageWidth;
+	rect.bottom = (LONG)imageHeight;
 	float rotation = rotate * DirectX::XM_PI / 180.0f;
-	//rotation = std::clamp(rotation, 0.0f, 1.0f);
 	imageList[hImage]->pSprite->DrawGraph(x, y, rect, width, height, rotate * DirectX::XM_PI / 180.0f, DEFAULT_ALPHA);
 }
 
-DirectX::XMFLOAT2 Image::GetGraphSize(int hImage)
+void Image::GetGraphSize(int hImage, int* width, int* height)
 {
-	return imageList[hImage]->pSprite->GetGraphSize();
+	DirectX::XMFLOAT2 size = imageList[hImage]->pSprite->GetGraphSize();
+	*width = (int)size.x;
+	*height = (int)size.y;
 }
 
 void Image::Relase()

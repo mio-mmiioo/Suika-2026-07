@@ -1,11 +1,16 @@
 #include "PlayScene.h"
 #include "../../Engine/Input.h"
 #include "../../Engine/Scene/SceneManager.h"
-#include "../../Engine/Data/Image.h"
 #include "../Data.h"
 #include "../MyLibrary/ButtonArea.h"
+#include "../../Engine/Time.h"
 #include "Player.h"
 #include "GameMaster.h"
+
+namespace PLAY_SCENE
+{
+	const float WAIT_CHANGE_SCENE_TIME = 60.0f;
+}
 
 PlayScene::PlayScene()
 {
@@ -16,6 +21,9 @@ PlayScene::PlayScene()
 	Area endNormal = Data::areaList["endNormal"];
 	Area endSelect = Data::areaList["endSelect"];
 	end_ = new Button(endNormal, endSelect);
+
+	isGameOver_ = false;
+	timer_ = PLAY_SCENE::WAIT_CHANGE_SCENE_TIME;
 }
 
 PlayScene::~PlayScene()
@@ -29,13 +37,40 @@ PlayScene::~PlayScene()
 
 void PlayScene::Update()
 {
-	GameMaster::Update();
 	end_->Update();
 
+	if (isGameOver_ == false)
+	{
+		if (GameMaster::Update() == 1)
+		{
+			Sound::Play("gameOverFruit", false);
+			isGameOver_ = true;
+			player_->DestroyMe();
+		}
+	}
+	else
+	{
+		timer_ -= Time::GetDeltaTime();
+		if (timer_ <= 0.0f)
+		{
+			SceneManager::ChangeScene("TITLE");
+		}
+	}
 
 	if (end_->GetIsPushArea() == true)
 	{
 		SceneManager::ChangeScene("TITLE");
+		Sound::Play("decide", FALSE);
+		if (isGameOver_ == false)
+		{
+			player_->DestroyMe();
+		}
+		return;
+	}
+
+	if (end_->GetIsOnArea() == true)
+	{
+		Sound::Play("select", false);
 	}
 }
 

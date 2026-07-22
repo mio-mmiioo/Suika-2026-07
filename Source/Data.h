@@ -3,6 +3,8 @@
 #include <map>
 #include <vector>
 #include "MyLibrary/ButtonArea.h"
+#include "../Engine/Data/Sound.h"
+#include "../Engine/Data/Image.h"
 
 namespace Data
 {
@@ -39,4 +41,5 @@ namespace Data
 	extern std::map<std::string, float> fruitPhysics;	// フルーツの物理計算に使用する数値
 	extern std::map<std::string, Area> areaList; // Areaの位置リスト
 	extern std::map<std::string, int> image; // 画像のリスト
+	extern std::map<std::string, int> sound; // 音源のリスト
 }

@@ -16,5 +16,4 @@ private:
 	Area title_;					// タイトルの画像
 	std::string bgm_;				// bgm
 	int hBackground_;
-	int hItigo_;
 };

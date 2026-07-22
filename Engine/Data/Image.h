@@ -61,8 +61,9 @@ namespace Image
 	/// 画像のサイズを取得する
 	/// </summary>
 	/// <param name="hImage">画像のハンドル</param>
-	/// <returns>( 横幅, 縦幅 )</returns>
-	DirectX::XMFLOAT2 GetGraphSize(int hImage);
+	/// <param name="width">画像の横幅を代入する変数</param>
+	/// <param name="height">画像の縦幅を代入する変数</param>
+	void GetGraphSize(int hImage, int* width, int* height);
 	
 	/// <summary>
 	/// 解放処理

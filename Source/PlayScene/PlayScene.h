@@ -16,4 +16,7 @@ private:
 	int hBackground_;
 	Player* player_;
 	Button* end_; // ゲーム終了ボタン
+
+	bool isGameOver_; // ゲームオーバーならtrue
+	float timer_; // ゲームオーバー後に自動遷移させるまでの時間
 };
