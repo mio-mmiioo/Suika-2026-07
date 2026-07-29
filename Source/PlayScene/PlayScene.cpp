@@ -7,6 +7,8 @@
 #include "Player.h"
 #include "GameMaster.h"
 
+#include "../../ImGui/imgui.h"
+
 namespace PLAY_SCENE
 {
 	const float WAIT_CHANGE_SCENE_TIME = 60.0f;
@@ -72,6 +74,10 @@ void PlayScene::Update()
 	{
 		Sound::Play("select", false);
 	}
+
+	ImGui::Begin("PlayScene");
+	ImGui::Text("time:%f", Time::GetDeltaTime());
+	ImGui::End();
 }
 
 void PlayScene::Draw()

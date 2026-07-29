@@ -4,7 +4,7 @@
 
 namespace EFFECT
 {
-	const float TIME = 0.05f;	// エフェクトをする時間
+	const float TIME = 0.06f;	// エフェクトをする時間
 	const int MAX_ANIM = 4;		// アニメーションの最大数
 }
 
@@ -43,4 +43,13 @@ void Effect::Update()
 void Effect::Draw()
 {
 	// ここに切り抜いた画像を描画する処理
+	int x = position_.x;
+	int y = position_.y;
+	int width = size_;
+	int height = size_;
+	int rectX = anim_ * imageWidth_ / EFFECT::MAX_ANIM;
+	int rectY = 0;
+	int rectWidth = imageWidth_ / EFFECT::MAX_ANIM;
+	int rectHeight = imageHeight_;
+	Image::DrawRectExtendGraph(x, y, width, height, rectX, rectY, rectWidth, rectHeight, hImage_);
 }

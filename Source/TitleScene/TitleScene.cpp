@@ -15,6 +15,8 @@ TitleScene::TitleScene()
 	hBackground_ = Data::image["background"];
 	bgm_ = "bgm02";
 	Sound::Play(bgm_, TRUE);
+	effect_ = Data::image["effect"];
+
 }
 
 TitleScene::~TitleScene()

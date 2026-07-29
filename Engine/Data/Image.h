@@ -57,6 +57,8 @@ namespace Image
 	/// <param name="hImage">画像のハンドル</param>
 	void DrawExtendRotateGraph(int x, int y, int width, int height, float rotate, int hImage);
 
+	void DrawRectExtendGraph(int x, int y, int width, int height, int rectX, int rectY, int rectWidth, int rectHeight, int hImage);
+
 	/// <summary>
 	/// 画像のサイズを取得する
 	/// </summary>

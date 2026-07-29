@@ -1,5 +1,5 @@
 #include "Time.h"
-#include "DirectX/Direct3D.h"
+
 
 namespace Time
 {

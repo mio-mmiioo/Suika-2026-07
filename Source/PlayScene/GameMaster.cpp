@@ -2,6 +2,7 @@
 #include "../MyLibrary/ButtonArea.h"
 #include "../Data.h"
 #include "Fruit.h"
+#include "Effect.h"
 
 #include <list>
 #include <algorithm>
@@ -141,6 +142,7 @@ void GameMaster::AddFruit(Fruit* fruit)
 
 void GameMaster::FruitCheckPosition()
 {
+	bool isCheck = false; // ゲームオーバーか確認すべきならtrue
 	Fruit* fruitA = nullptr;
 	Fruit* fruitB = nullptr;
 
@@ -165,7 +167,7 @@ void GameMaster::FruitCheckPosition()
 		if (box.leftTopX >= pos1.x || box.rightDownX <= pos1.x)
 		{
 			// ゲームオーバーのフラグを立てる
-			isCheckGameOver = true;
+			isCheck = true;
 			IsFruitCheckGameOver(fruitA);
 		}
 
@@ -200,7 +202,7 @@ void GameMaster::FruitCheckPosition()
 					{
 						Point p = { (pos1.x + pos2.x) / 2 + Data::fruitPhysics["positionOffset"], (pos1.y + pos2.y) / 2 };
 						new Fruit(type, p);
-
+						new Effect(p, Data::fruitDataList[type].distanceR);
 						Sound::Play("createFruit", false); // 生成音を鳴らす
 
 						// ここで削除するとアクセスエラーなど多々問題があるため、削除リストに追加
@@ -264,7 +266,14 @@ void GameMaster::FruitCheckPosition()
 				fruitA->WakeUp();
 			}
 		}
+
+		if (isCheck == true)
+		{
+			break;
+		}
 	}
+
+	isCheckGameOver = isCheck;
 
 	// 最後にもう一度、箱内に収める
 	for (Fruit* fruit : allFruitList)

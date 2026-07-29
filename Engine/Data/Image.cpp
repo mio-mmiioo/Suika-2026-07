@@ -99,6 +99,16 @@ void Image::DrawExtendRotateGraph(int x, int y, int width, int height, float rot
 	imageList[hImage]->pSprite->DrawGraph(x, y, rect, width, height, rotate * DirectX::XM_PI / 180.0f, DEFAULT_ALPHA);
 }
 
+void Image::DrawRectExtendGraph(int x, int y, int width, int height, int rectX, int rectY, int rectWidth, int rectHeight, int hImage)
+{
+	RECT rect;
+	rect.left = (LONG)rectX;
+	rect.top = (LONG)rectY;
+	rect.right = (LONG)rectWidth + rectX;
+	rect.bottom = (LONG)rectHeight + rectY;
+	imageList[hImage]->pSprite->DrawGraph(x, y, rect, width, height, DEFAULT_ROTATE, DEFAULT_ALPHA);
+}
+
 void Image::GetGraphSize(int hImage, int* width, int* height)
 {
 	DirectX::XMFLOAT2 size = imageList[hImage]->pSprite->GetGraphSize();

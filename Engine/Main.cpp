@@ -10,6 +10,12 @@
 
 #include "../Source/Data.h"
 
+#include "../ImGui/imgui.h"
+#include "../ImGui/imgui_impl_dx11.h"
+#include "../ImGui/imgui_impl_win32.h"
+
+extern IMGUI_IMPL_API LRESULT ImGui_ImplWin32_WndProcHandler(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam);
+
 LRESULT CALLBACK WndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam);
 
 LPCTSTR WIN_CLASS_NAME = TEXT("SampleGame"); // ウィンドウクラス名
@@ -55,6 +61,8 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInst, LPSTR lpCmdLine, 
 
 	// ウィンドウを表示
 	ShowWindow(hWnd, nCmdShow);
+
+	// Direct3Dをはじめとして、その他使用するものの初期化
 	Direct3D::Initialize(windowWidth, windowHeight, hWnd);
 	Sound::Initialize();
 	Input::Initialize(hWnd);
@@ -63,6 +71,17 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInst, LPSTR lpCmdLine, 
 	ObjectManager::Init();
 	SceneManager::Init();
 	Camera::Initialize();
+
+	// ImGuiの初期化
+	{
+		IMGUI_CHECKVERSION();
+		ImGui::CreateContext();
+		ImGuiIO& io = ImGui::GetIO();
+		io.DisplaySize = ImVec2((float)windowWidth, (float)windowHeight);
+		ImGui_ImplWin32_Init(hWnd);
+		ImGui_ImplDX11_Init(Direct3D::pDevice, Direct3D::pContext);
+		ImGui::StyleColorsLight();
+	}
 
 
 	// メッセージループ
@@ -79,6 +98,9 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInst, LPSTR lpCmdLine, 
 		else
 		{
 			// 処理
+			ImGui_ImplWin32_NewFrame();
+			ImGui_ImplDX11_NewFrame();
+			ImGui::NewFrame();
 			Time::Update();
 			Sound::Update();
 			Camera::Update();
@@ -95,7 +117,8 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInst, LPSTR lpCmdLine, 
 			// 描画処理
 			SceneManager::Draw();
 			ObjectManager::Draw();
-
+			ImGui::Render();
+			ImGui_ImplDX11_RenderDrawData(ImGui::GetDrawData());
 			Direct3D::EndDraw();
 		}
 	}
@@ -111,6 +134,11 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInst, LPSTR lpCmdLine, 
 
 LRESULT CALLBACK WndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
 {
+	if (ImGui_ImplWin32_WndProcHandler(hWnd, msg, wParam, lParam))
+	{
+		return true;
+	}
+
 	switch (msg)
 	{
 	case WM_DESTROY:
