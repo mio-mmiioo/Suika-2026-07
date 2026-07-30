@@ -132,6 +132,9 @@
     <ClCompile Include="ImGui\imgui_widgets.cpp">
       <Filter>ImGui</Filter>
     </ClCompile>
+    <ClCompile Include="Source\MyLibrary\Observer.cpp">
+      <Filter>Source\MyLibrary</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\Data\CsvReader.h">
@@ -244,6 +247,9 @@
     </ClInclude>
     <ClInclude Include="ImGui\imstb_truetype.h">
       <Filter>ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\MyLibrary\Observer.h">
+      <Filter>Source\MyLibrary</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

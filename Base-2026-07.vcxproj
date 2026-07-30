@@ -139,7 +139,7 @@
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
-      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <AdditionalOptions>/utf-8 %(AdditionalOptions)</AdditionalOptions>
       <AdditionalIncludeDirectories>$(MSBuildThisFileDirectory)..\..\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
@@ -180,6 +180,7 @@
     <ClCompile Include="ImGui\imgui_widgets.cpp" />
     <ClCompile Include="Source\Data.cpp" />
     <ClCompile Include="Source\MyLibrary\ButtonArea.cpp" />
+    <ClCompile Include="Source\MyLibrary\Observer.cpp" />
     <ClCompile Include="Source\PlayScene\Effect.cpp" />
     <ClCompile Include="Source\PlayScene\Fruit.cpp" />
     <ClCompile Include="Source\PlayScene\GameMaster.cpp" />
@@ -219,6 +220,7 @@
     <ClInclude Include="Source\Data.h" />
     <ClInclude Include="Source\MyLibrary\ButtonArea.h" />
     <ClInclude Include="Source\MyLibrary\MyStruct.h" />
+    <ClInclude Include="Source\MyLibrary\Observer.h" />
     <ClInclude Include="Source\PlayScene\Effect.h" />
     <ClInclude Include="Source\PlayScene\Fruit.h" />
     <ClInclude Include="Source\PlayScene\GameMaster.h" />

@@ -34,10 +34,21 @@ namespace Data
 		FRUIT_TYPE type;	// 種類
 	};
 
+	// ゲームを保存するときに必要なフルーツのデータ
+	struct SaveFruitData
+	{
+		FRUIT_TYPE type; // 種類
+		float x; // x座標
+		float y; // y座標
+	};
+
 	void Init(); // 初期化
 	FRUIT_TYPE NumberToFruitType(int number);
 
+	void InitSaveFruitData(int* score);
+
 	extern std::map<FRUIT_TYPE, FruitData> fruitDataList; // フルーツのデータリスト
+	extern std::vector<SaveFruitData> saveFruitData; // 保存したフルーツのデータ
 	extern std::map<std::string, float> fruitPhysics;	// フルーツの物理計算に使用する数値
 	extern std::map<std::string, Area> areaList; // Areaの位置リスト
 	extern std::map<std::string, int> image; // 画像のリスト

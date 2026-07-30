@@ -75,9 +75,11 @@ void PlayScene::Update()
 		Sound::Play("select", false);
 	}
 
+#if _DEBUG
 	ImGui::Begin("PlayScene");
 	ImGui::Text("time:%f", Time::GetDeltaTime());
 	ImGui::End();
+#endif
 }
 
 void PlayScene::Draw()

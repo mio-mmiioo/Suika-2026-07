@@ -3,6 +3,8 @@
 #include "../../Engine/Input.h"
 #include "../../Engine/Time.h"
 #include "../../Engine/Data/CsvReader.h"
+
+#include "../MyLibrary/Observer.h"
 #include "Fruit.h"
 
 namespace PLAYER
@@ -79,7 +81,10 @@ void Player::Update()
 	if (Input::IsButtonDown("put") && coolDownTimer_ <= 0.0f)
 	{
 		new Fruit(fruitType_, fruitPosition_);
+		Observer::AddScore(fruitData_.score);
 		Sound::Play("putFruit", false);
+
+		// 次のフルーツの作成
 		CreateFruitType();
 		fruitData_ = Data::fruitDataList[fruitType_];
 

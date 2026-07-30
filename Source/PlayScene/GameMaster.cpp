@@ -1,11 +1,15 @@
 #include "GameMaster.h"
 #include "../MyLibrary/ButtonArea.h"
+#include "../MyLibrary/Observer.h"
 #include "../Data.h"
 #include "Fruit.h"
 #include "Effect.h"
 
 #include <list>
 #include <algorithm>
+#include <fstream>
+
+#include "../../Engine/Input.h"
 
 namespace GameMaster
 {
@@ -37,6 +41,16 @@ namespace GameMaster
 	/// <returns>進化後のフルーツの種類</returns>
 	Data::FRUIT_TYPE GetNextType(Data::FRUIT_TYPE type);
 
+	/// <summary>
+	/// 現在のゲームを保存する
+	/// </summary>
+	void SaveData();
+
+	/// <summary>
+	/// 前回のゲームの状態を作成する
+	/// </summary>
+	void CreatePrevGame();
+
 	std::list<Fruit*> allFruitList;		// 箱内にあるすべてのフルーツのリスト
 	std::list<Fruit*> deleteFruitList;	// 削除予定のフルーツリスト
 
@@ -62,6 +76,10 @@ void GameMaster::Init()
 	Sound::Play(hBgm, true);
 
 	isCheckGameOver = false;
+	if (Observer::GetIsPrevGameCreated() == false)
+	{
+		CreatePrevGame();
+	}
 }
 
 int GameMaster::Update()
@@ -92,7 +110,7 @@ void GameMaster::Draw()
 	{
 		int x = score.rightDownX;
 		int y = score.leftTopY;
-		int score = 123456;
+		int score = Observer::GetScore(); // 現在の得点を取得
 		int digit[MAX_SCORE_DIGITS];
 
 		// 桁の数字を代入
@@ -117,6 +135,8 @@ void GameMaster::Draw()
 void GameMaster::Release()
 {
 	Sound::Stop(hBgm);
+	SaveData(); // データを保存する
+
 	for (auto itr = allFruitList.begin(); itr != allFruitList.end(); itr++)
 	{
 		(*itr)->DestroyMe();
@@ -203,6 +223,7 @@ void GameMaster::FruitCheckPosition()
 						Point p = { (pos1.x + pos2.x) / 2 + Data::fruitPhysics["positionOffset"], (pos1.y + pos2.y) / 2 };
 						new Fruit(type, p);
 						new Effect(p, Data::fruitDataList[type].distanceR);
+						Observer::AddScore(Data::fruitDataList[type].score); // 得点の加算
 						Sound::Play("createFruit", false); // 生成音を鳴らす
 
 						// ここで削除するとアクセスエラーなど多々問題があるため、削除リストに追加
@@ -436,4 +457,53 @@ Data::FRUIT_TYPE GameMaster::GetNextType(Data::FRUIT_TYPE type)
 		ret = Data::FRUIT_TYPE::MAX_FRUIT_TYPE;
 	}
 	return ret;
+}
+
+void GameMaster::SaveData()
+{
+	std::ofstream file("Assets/data/saveData.csv");
+
+	// ゲームオーバーじゃない場合、現在のフルーツの情報を書き込む
+	if (isCheckGameOver == false)
+	{
+		file << Observer::GetScore() << std::endl;
+		for (auto& fruit : allFruitList)
+		{
+			Point pos = fruit->GetPosition();
+			Data::FRUIT_TYPE type = fruit->GetFruitData().type;
+			
+			// 置く前のフルーツなら考慮しない
+			if (pos.y <= box.leftTopY)
+			{
+				continue;
+			}
+			// データに書き込み
+			file << type << ",";
+			file << pos.x << "," << pos.y;
+			file << std::endl;
+		}
+	}
+	// ゲームオーバーの場合、特に書き込まない
+	else
+	{
+		file << "";
+	}
+	file.close();
+
+	int score = 0;
+	Data::InitSaveFruitData(&score);
+}
+
+void GameMaster::CreatePrevGame()
+{
+	int score = 0;
+	Data::InitSaveFruitData(&score); // 前回までのゲームの状況を読み込む
+	Data::SaveFruitData current;
+	for (int count = 0; count < Data::saveFruitData.size(); count++)
+	{
+		current = Data::saveFruitData[count];
+		new Fruit(current.type, Point(current.x, current.y));
+	}
+	Observer::SetScore(score); // スコアをセット
+	Observer::SetIsPrevGameCreated(true); // 前回のゲームを作成した報告
 }

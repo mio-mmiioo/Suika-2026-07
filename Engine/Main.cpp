@@ -8,6 +8,7 @@
 #include "Time.h"
 #include "Data/Sound.h"
 
+#include "../Source/MyLibrary/Observer.h"
 #include "../Source/Data.h"
 
 #include "../ImGui/imgui.h"
@@ -71,17 +72,18 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInst, LPSTR lpCmdLine, 
 	ObjectManager::Init();
 	SceneManager::Init();
 	Camera::Initialize();
+	Observer::Init();
 
+#if _DEBUG
 	// ImGuiの初期化
-	{
-		IMGUI_CHECKVERSION();
-		ImGui::CreateContext();
-		ImGuiIO& io = ImGui::GetIO();
-		io.DisplaySize = ImVec2((float)windowWidth, (float)windowHeight);
-		ImGui_ImplWin32_Init(hWnd);
-		ImGui_ImplDX11_Init(Direct3D::pDevice, Direct3D::pContext);
-		ImGui::StyleColorsLight();
-	}
+	IMGUI_CHECKVERSION();
+	ImGui::CreateContext();
+	ImGuiIO& io = ImGui::GetIO();
+	io.DisplaySize = ImVec2((float)windowWidth, (float)windowHeight);
+	ImGui_ImplWin32_Init(hWnd);
+	ImGui_ImplDX11_Init(Direct3D::pDevice, Direct3D::pContext);
+	ImGui::StyleColorsLight();
+#endif
 
 
 	// メッセージループ
@@ -98,9 +100,11 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInst, LPSTR lpCmdLine, 
 		else
 		{
 			// 処理
+#if _DEBUG
 			ImGui_ImplWin32_NewFrame();
 			ImGui_ImplDX11_NewFrame();
 			ImGui::NewFrame();
+#endif
 			Time::Update();
 			Sound::Update();
 			Camera::Update();
@@ -117,8 +121,10 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInst, LPSTR lpCmdLine, 
 			// 描画処理
 			SceneManager::Draw();
 			ObjectManager::Draw();
+#if _DEBUG
 			ImGui::Render();
 			ImGui_ImplDX11_RenderDrawData(ImGui::GetDrawData());
+#endif
 			Direct3D::EndDraw();
 		}
 	}
@@ -134,10 +140,12 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInst, LPSTR lpCmdLine, 
 
 LRESULT CALLBACK WndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
 {
+#if _DEBUG
 	if (ImGui_ImplWin32_WndProcHandler(hWnd, msg, wParam, lParam))
 	{
 		return true;
 	}
+#endif
 
 	switch (msg)
 	{

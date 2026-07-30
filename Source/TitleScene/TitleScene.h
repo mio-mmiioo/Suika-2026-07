@@ -12,10 +12,9 @@ public:
 	void Draw() override;
 
 private:
-	Button* newStart_;				// はじめる
-	Area title_;					// タイトルの画像
-	std::string bgm_;				// bgm
-	int hBackground_;				// 背景
-
-	int effect_; // 試し
+	Button* newStart_;		// はじめる
+	Button* continueStart_;	// 前回のつづきから始める
+	Area title_;			// タイトルの画像
+	std::string bgm_;		// bgm
+	int hBackground_;		// 背景
 };
