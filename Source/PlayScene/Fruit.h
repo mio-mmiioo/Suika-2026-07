@@ -79,15 +79,15 @@ private:
 	Data::FruitData fruitData_; // フルーツのデータ
 	Point position_; // 位置
 
-	bool isOnGround_; // 箱の底にいるならtrue
-	Point velocity_; // 加わっている力
+	bool isOnGround_;	// 箱の底にいるならtrue
+	Point velocity_;	// 加わっている力
 
-	bool isSleep_; // スリープ( 物理演算をしない )ならtrue
-	int supportCount_; // 他のフルーツと接触している数
-	int supportCountMin_; // 語化のフルーツと接触して、支えられる最小個数
-	int sleepCount_; // スリープ状態に持っていくためのカウント
+	bool isSleep_;			// スリープ( 物理演算をしない )ならtrue
+	int supportCount_;		// 他のフルーツと接触している数
+	int supportCountMin_;	// 他のフルーツと接触して、支えられる最小個数
+	int sleepCount_;		// スリープ状態に持っていくためのカウント
 
 	bool isGameOverFruit_; // 箱の外に出てしまったらtrue
 
-	float angle_;
+	float angle_; // 角度
 };

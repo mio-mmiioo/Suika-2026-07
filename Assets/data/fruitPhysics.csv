@@ -12,3 +12,4 @@ groundFriction,0.9,地面での摩擦係数
 airResistance,0.96,空中での抵抗
 sleepLimitSq,0.4,動いていないとみなす、速度の二乗の値
 gravity,0.6,重力
+velocityLimit,0.001,velocityの最小値

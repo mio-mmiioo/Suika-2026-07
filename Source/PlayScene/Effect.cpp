@@ -28,6 +28,7 @@ Effect::~Effect()
 void Effect::Update()
 {
 	timer_ -= Time::GetDeltaTime();
+	// timer_が0以下になったら、切り抜く画像の位置をずらす
 	if (timer_ <= 0.0f)
 	{
 		anim_ += 1;
@@ -42,7 +43,6 @@ void Effect::Update()
 
 void Effect::Draw()
 {
-	// ここに切り抜いた画像を描画する処理
 	int x = position_.x;
 	int y = position_.y;
 	int width = size_;

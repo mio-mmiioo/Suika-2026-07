@@ -8,10 +8,15 @@
 class Effect : public GameObject
 {
 public:
+	/// <summary>
+	/// Effectのコンストラクタ
+	/// </summary>
+	/// <param name="position">位置</param>
+	/// <param name="fruitDistanceR">半径</param>
 	Effect(Point position, int fruitDistanceR);
-	~Effect() override;
-	void Update() override;
-	void Draw() override;
+	~Effect() override;		// デストラクタ
+	void Update() override; // 更新処理
+	void Draw() override;	// 描画処理
 
 private:
 	Point position_;	// 位置

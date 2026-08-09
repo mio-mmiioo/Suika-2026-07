@@ -3,6 +3,8 @@
 #include "../../Engine/Time.h"
 #include "GameMaster.h"
 
+#include "../../ImGui/imgui.h"
+
 Fruit::Fruit(Data::FRUIT_TYPE fruitType, Point position)
 {
 	fruitData_ = Data::fruitDataList[fruitType];
@@ -28,6 +30,29 @@ Fruit::~Fruit()
 
 void Fruit::Update()
 {
+
+#if _DEBUG
+	ImGui::Begin("Fruit");
+	ImGui::Text("velocity.x : %f", velocity_.x);
+	if (isSleep_ == true)
+	{
+		ImGui::Text("isSleep : true");
+	}
+	else
+	{
+		if (GameMaster::FruitCheckBoxPosition(this) == true)
+		{
+			ImGui::Text("底についている");
+		}
+		ImGui::Text("isSleep : false");
+		ImGui::Text("sleepCount : %d", sleepCount_);
+		ImGui::Text("supportCount : %d", supportCount_);
+		ImGui::Text("angle : %f", angle_);
+	}
+	ImGui::Text("\n");
+	ImGui::End();
+#endif
+
 	if (isSleep_ == true)
 	{
 		return;
@@ -44,7 +69,15 @@ void Fruit::Update()
 
 	if (isOnGround_ == true)
 	{
-		velocity_.x = velocity_.x * Data::fruitPhysics["groundFrection"]; // 地面では転がりにくくする
+		velocity_.x = velocity_.x * Data::fruitPhysics["groundFriction"]; // 地面では転がりにくくする
+		if (velocity_.x < -Data::fruitPhysics["velocityLimit"])
+		{
+			velocity_.x = 0.0f;
+		}
+		else if (velocity_.x > Data::fruitPhysics["velocityLimit"])
+		{
+			velocity_.x = 0.0f;
+		}
 	}
 	else
 	{
@@ -52,7 +85,7 @@ void Fruit::Update()
 	}
 
 	// x方向の力の向きによって回転角度を変える
-	if (velocity_.x > 0)
+	if (velocity_.x > 0.0f)
 	{
 		angle_ += 0.1f;
 		if (angle_ >= 360.0f)
@@ -60,7 +93,7 @@ void Fruit::Update()
 			angle_ = 0.0f;
 		}
 	}
-	else
+	else if (velocity_.x < 0.0f)
 	{
 		angle_ -= 0.1f;
 		if (angle_ <= 0.0f)
@@ -95,12 +128,7 @@ void Fruit::Update()
 		sleepCount_ = 0;
 	}
 
-	if (supportCount_ >= supportCountMin_)
-	{
-		isSleep_ = true;
-		velocity_ = { 0.0f, 0.0f };
-	}
-	if (sleepCount_ > Data::fruitPhysics["maxSleepCount"])
+	if ((sleepCount_ > Data::fruitPhysics["maxSleepCount"]) || (supportCount_ >= supportCountMin_))
 	{
 		isSleep_ = true;
 		velocity_ = { 0.0f, 0.0f };

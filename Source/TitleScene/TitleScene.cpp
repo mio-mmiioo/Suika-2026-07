@@ -5,6 +5,8 @@
 #include "../MyLibrary/Observer.h"
 #include "../Data.h"
 
+#include "../../ImGui/imgui.h"
+
 TitleScene::TitleScene()
 {
 	Area newStartNormal = Data::areaList["newStartNormal"];
@@ -19,7 +21,9 @@ TitleScene::TitleScene()
 	hBackground_ = Data::image["background"];
 	bgm_ = "bgm02";
 	Sound::Play(bgm_, TRUE);
-
+	volume_ = 0.75f;
+	Sound::ChangeVolume(bgm_, volume_);
+	
 	int score = 0;
 	Data::InitSaveFruitData(&score);
 }
@@ -66,6 +70,14 @@ void TitleScene::Update()
 	{
 		SceneManager::ChangeScene("PLAY");
 	}
+
+#if _DEBUG
+	ImGui::Begin("Title");
+	ImGui::InputFloat("volume:", &volume_);
+	Sound::ChangeVolume(bgm_, volume_);
+	ImGui::End();
+
+#endif
 }
 
 void TitleScene::Draw()

@@ -11,7 +11,6 @@ namespace PLAYER
 {
 	const Point INIT_FRUIT_POSITION = { 512.0f, 50.0f }; // 次に置くフルーツの初期位置
 	const float COOL_DOWN_TIME = 0.5f; // 連打を防ぐ時間
-	const float MOVE_SPEED = 100.0f;
 }
 
 Player::Player()
@@ -58,15 +57,6 @@ void Player::Update()
 	{
 		fruitPosition_.x = Input::GetMousePosition().x;
 	}
-
-	//if (Input::IsButtonKeepDown("right") == true)
-	//{
-	//	fruitPosition_.x += Time::GetDeltaTime() * PLAYER::MOVE_SPEED;
-	//}
-	//if (Input::IsButtonKeepDown("left") == true)
-	//{
-	//	fruitPosition_.x -= Time::GetDeltaTime() * PLAYER::MOVE_SPEED;
-	//}
 
 	// 位置補正
 	if (fruitPosition_.x < Data::areaList["box"].leftTopX + fruitData_.distanceR)

@@ -9,8 +9,6 @@
 #include <algorithm>
 #include <fstream>
 
-#include "../../Engine/Input.h"
-
 namespace GameMaster
 {
 	const int MAX_SCORE_DIGITS = 7; // スコアの桁数
@@ -61,7 +59,7 @@ namespace GameMaster
 	int scoreNumWidth;		// 得点の1つの数字の横幅
 	int scoreNumHeight;		// 得点の一つの数字の縦幅
 
-	std::string hBgm;
+	std::string hBgm; // BGM
 }
 
 void GameMaster::Init()
@@ -74,6 +72,7 @@ void GameMaster::Init()
 	scoreNumHeight = number.rightDownY - number.leftTopY;
 	hBgm = "bgm01";
 	Sound::Play(hBgm, true);
+	Sound::ChangeVolume(hBgm, 0.75f);
 
 	isCheckGameOver = false;
 	if (Observer::GetIsPrevGameCreated() == false)
@@ -241,7 +240,7 @@ void GameMaster::FruitCheckPosition()
 				float wakeUpVelocity = Data::fruitPhysics["wakeUpVelocity"];
 				if (velocityAY > wakeUpVelocity || velocityBY > wakeUpVelocity)
 				{
-					if (fruitA->GetIsSleep() == false || fruitB->GetIsSleep() == false)
+					if (fruitA->GetIsSleep() == true || fruitB->GetIsSleep() == true)
 					{
 						fruitA->WakeUp();
 						fruitB->WakeUp();
@@ -265,8 +264,14 @@ void GameMaster::FruitCheckPosition()
 
 				// 横方向に転がす
 				float pushPower = overlap * Data::fruitPhysics["fruitRollPower"];
-				fruitA->AddVelocity(Point(-n.x * pushPower, 0.0f));
-				fruitB->AddVelocity(Point(n.x * pushPower, 0.0f));
+				if (fruitA->GetIsSleep() == false)
+				{
+					fruitA->AddVelocity(Point(-n.x * pushPower, 0.0f));
+				}
+				if (fruitB->GetIsSleep() == false)
+				{
+					fruitB->AddVelocity(Point(n.x* pushPower, 0.0f));
+				}
 
 				// 位置をセットする
 				fruitA->SetPosition(pos1);
@@ -331,7 +336,7 @@ bool GameMaster::FruitCheckBoxPosition(Fruit* fruit)
 			p.x = box.rightDownX - distanceR;
 		}
 	}
-	if (p.y + distanceR > box.rightDownY)
+	if (p.y + distanceR >= box.rightDownY)
 	{
 		p.y = box.rightDownY - distanceR;
 		ret = true;

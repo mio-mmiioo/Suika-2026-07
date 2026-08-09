@@ -50,7 +50,7 @@ namespace Input
 	void InitActionMap();
 
 	/// <summary>
-	/// 入力値をデッドゾーンを考慮しつつ、-1.0~1.0の値に変換する
+	/// 入力値をデッドゾーンを考慮しつつ、-1.0～1.0の値に変換する
 	/// コントローラーで使用する
 	/// </summary>
 	/// <param name="raw">現在の値</param>
@@ -64,14 +64,9 @@ namespace Input
 void Input::InitActionMap()
 {
 	// ここに入力の処理内容をかく
-	inputActionMap["quit"] = { {INPUT_TYPE::KEYBOARD, DIK_ESCAPE} };
-	inputActionMap["ok"] = { {INPUT_TYPE::KEYBOARD, DIK_SPACE}, {INPUT_TYPE::MOUSE, MOUSE_LEFT} };
-	inputActionMap["next"] = { {INPUT_TYPE::KEYBOARD, DIK_N}, {INPUT_TYPE::MOUSE, MOUSE_RIGHT} };
-	inputActionMap["right"] = { {INPUT_TYPE::KEYBOARD, DIK_RIGHT} };
-	inputActionMap["left"] = { {INPUT_TYPE::KEYBOARD, DIK_LEFT} };
-	inputActionMap["create"] = { {INPUT_TYPE::KEYBOARD, DIK_C} };
-
-	inputActionMap["put"] = { {INPUT_TYPE::KEYBOARD, DIK_SPACE}, {INPUT_TYPE::MOUSE, MOUSE_LEFT} };
+	inputActionMap["quit"] = { {INPUT_TYPE::KEYBOARD, DIK_ESCAPE} }; // ゲームを終了
+	inputActionMap["ok"] = { {INPUT_TYPE::KEYBOARD, DIK_SPACE}, {INPUT_TYPE::MOUSE, MOUSE_LEFT} };	// 決定
+	inputActionMap["put"] = { {INPUT_TYPE::KEYBOARD, DIK_SPACE}, {INPUT_TYPE::MOUSE, MOUSE_LEFT} }; // フルーツを置く
 }
 
 float Input::GetAnalogValue(int raw, int max, int deadZone)

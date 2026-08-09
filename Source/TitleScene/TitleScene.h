@@ -17,4 +17,6 @@ private:
 	Area title_;			// タイトルの画像
 	std::string bgm_;		// bgm
 	int hBackground_;		// 背景
+
+	float volume_; // 音量
 };
