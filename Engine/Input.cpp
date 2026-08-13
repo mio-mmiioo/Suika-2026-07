@@ -35,6 +35,9 @@ namespace Input
 	const int MOUSE_RIGHT = 1;
 	const int MOUSE_MIDDLE = 2;
 
+	const int PAD_STICK_MAX = 32767; // ゲームパッドのスティック入力の最大値
+	const int PAD_TRRIGER_MAX = 255; // ゲームパッドのトリガー入力の最大値
+
 	LPDIRECTINPUT8 pDInput = nullptr;
 	LPDIRECTINPUTDEVICE8 pKeyDevice;	// デバイスオブジェクト・キーボード
 	BYTE keyState[KEY_MAX] = { 0 };		// キーボードの状態
@@ -227,26 +230,26 @@ DirectX::XMFLOAT3 Input::GetMouseMove()
 
 DirectX::XMFLOAT3 Input::GetPadStickLeft()
 {
-	float x = GetAnalogValue(controllerState.Gamepad.sThumbLX, 32767, XINPUT_GAMEPAD_LEFT_THUMB_DEADZONE);
-	float y = GetAnalogValue(controllerState.Gamepad.sThumbLY, 32767, XINPUT_GAMEPAD_LEFT_THUMB_DEADZONE);
+	float x = GetAnalogValue(controllerState.Gamepad.sThumbLX, PAD_STICK_MAX, XINPUT_GAMEPAD_LEFT_THUMB_DEADZONE);
+	float y = GetAnalogValue(controllerState.Gamepad.sThumbLY, PAD_STICK_MAX, XINPUT_GAMEPAD_LEFT_THUMB_DEADZONE);
 	return DirectX::XMFLOAT3(x, y, 0);
 }
 
 DirectX::XMFLOAT3 Input::GetPadStickRight()
 {
-	float x = GetAnalogValue(controllerState.Gamepad.sThumbRX, 32767, XINPUT_GAMEPAD_RIGHT_THUMB_DEADZONE);
-	float y = GetAnalogValue(controllerState.Gamepad.sThumbRY, 32767, XINPUT_GAMEPAD_RIGHT_THUMB_DEADZONE);
+	float x = GetAnalogValue(controllerState.Gamepad.sThumbRX, PAD_STICK_MAX, XINPUT_GAMEPAD_RIGHT_THUMB_DEADZONE);
+	float y = GetAnalogValue(controllerState.Gamepad.sThumbRY, PAD_STICK_MAX, XINPUT_GAMEPAD_RIGHT_THUMB_DEADZONE);
 	return DirectX::XMFLOAT3(x, y, 0);
 }
 
 float Input::GetPadTrrigerLeft()
 {
-	return GetAnalogValue(controllerState.Gamepad.bLeftTrigger, 255, XINPUT_GAMEPAD_TRIGGER_THRESHOLD);
+	return GetAnalogValue(controllerState.Gamepad.bLeftTrigger, PAD_TRRIGER_MAX, XINPUT_GAMEPAD_TRIGGER_THRESHOLD);
 }
 
 float Input::GetPadTrrigerRight()
 {
-	return GetAnalogValue(controllerState.Gamepad.bRightTrigger, 255, XINPUT_GAMEPAD_TRIGGER_THRESHOLD);
+	return GetAnalogValue(controllerState.Gamepad.bRightTrigger, PAD_TRRIGER_MAX, XINPUT_GAMEPAD_TRIGGER_THRESHOLD);
 }
 
 void Input::SetPadVibration(int left, int right)

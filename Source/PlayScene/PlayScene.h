@@ -4,13 +4,16 @@
 class Button;
 class Player;
 
+/// <summary>
+/// プレイシーン
+/// </summary>
 class PlayScene : public Scene
 {
 public:
 	PlayScene();
 	~PlayScene() override;
-	void Update() override;
-	void Draw() override;
+	void Update() override; // 更新処理
+	void Draw() override; // 描画処理
 
 private:
 	int hBackground_;

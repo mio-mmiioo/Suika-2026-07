@@ -42,7 +42,7 @@ void Fruit::Update()
 	{
 		if (GameMaster::FruitCheckBoxPosition(this) == true)
 		{
-			ImGui::Text("底についている");
+			ImGui::Text("box bottom");
 		}
 		ImGui::Text("isSleep : false");
 		ImGui::Text("sleepCount : %d", sleepCount_);

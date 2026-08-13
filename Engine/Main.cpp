@@ -47,17 +47,17 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInst, LPSTR lpCmdLine, 
 
 	// ウィンドウを作成
 	HWND hWnd = CreateWindow(
-		WIN_CLASS_NAME,			// ウィンドウクラス名
-		L"サンプルゲーム",		// タイトルバーに表示する内容
-		WS_OVERLAPPEDWINDOW,	// スタイル( 普通のウィンドウ )
-		CW_USEDEFAULT,			// 表示位置左( おまかせ )
-		CW_USEDEFAULT,			// 表示位置上( おまかせ )
-		windowWidth,			// ウィンドウの横幅
-		windowHeight,			// ウィンドウの高さ
-		NULL,					// 親ウィンドウ( なし )
-		NULL,					// メニュー( なし )
-		hInstance,				// インスタンス
-		NULL					// パラメータ( なし )
+		WIN_CLASS_NAME,				// ウィンドウクラス名
+		L"落ち物系パズルゲーム",	// タイトルバーに表示する内容
+		WS_OVERLAPPEDWINDOW & ~WS_THICKFRAME & ~WS_MAXIMIZEBOX,	// スクリーンのサイズ変更を無効にする
+		CW_USEDEFAULT,				// 表示位置左( おまかせ )
+		CW_USEDEFAULT,				// 表示位置上( おまかせ )
+		windowWidth,				// ウィンドウの横幅
+		windowHeight,				// ウィンドウの高さ
+		NULL,						// 親ウィンドウ( なし )
+		NULL,						// メニュー( なし )
+		hInstance,					// インスタンス
+		NULL						// パラメータ( なし )
 	);
 
 	// ウィンドウを表示
@@ -155,6 +155,14 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
 
 	case WM_MOUSEMOVE: // マウスが動いた
 		Input::SetMousePosition(LOWORD(lParam), HIWORD(lParam));
+		return 0;
+
+	case WM_CREATE: // スクリーンを制作時、画面の拡縮の設定をする
+		HMENU hMenu = GetSystemMenu(hWnd, FALSE);
+		if (hMenu)
+		{
+			DeleteMenu(hMenu, SC_MAXIMIZE, MF_BYCOMMAND);
+		}
 		return 0;
 	}
 	return DefWindowProc(hWnd, msg, wParam, lParam);

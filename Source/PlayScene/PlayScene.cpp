@@ -30,10 +30,10 @@ PlayScene::PlayScene()
 
 PlayScene::~PlayScene()
 {
-	if (player_ != nullptr)
-	{
-		player_->DestroyMe();
-	}
+	//if (player_ != nullptr)
+	//{
+	//	player_->DestroyMe();
+	//}
 	GameMaster::Release();
 }
 
@@ -88,4 +88,9 @@ void PlayScene::Draw()
 	GameMaster::Draw();
 	
 	end_->Draw();
+
+	if (isGameOver_ == true)
+	{
+		ButtonArea::DrawArea(Data::areaList["gameOver"]);
+	}
 }
