@@ -45,10 +45,10 @@ namespace Data
 
 	const int CSV_DATA_START_LINE = 1; // csvデータの読み込みを開始する位置　※一番上は、補足に使用する
 
-	std::map<FRUIT_TYPE, FruitData> fruitDataList;	// フルーツのデータリスト
-	std::vector<SaveFruitData> saveFruitData; // 保存したフルーツのデータ
+	std::map<FRUIT_TYPE, FRUIT_DATA> fruitDataList;	// フルーツのデータリスト
+	std::vector<SAVE_FRUIT_DATA> saveFruitData; // 保存したフルーツのデータ
 	std::map<std::string, float> fruitPhysics;		// フルーツの物理計算に使用する数値
-	std::map<std::string, Area> areaList;			// areaの位置リスト
+	std::map<std::string, AREA> areaList;			// areaの位置リスト
 	std::map<std::string, int> image; // 画像のリスト
 	std::map<std::string, int> sound; // 音源のリスト
 
@@ -126,7 +126,7 @@ void Data::InitSound()
 void Data::InitFruitDataList()
 {
 	CsvReader* csv = new CsvReader("fruitDataList.csv");
-	FruitData current; // 確認中の果物
+	FRUIT_DATA current; // 確認中の果物
 	std::string name = "";
 	for (int line = CSV_DATA_START_LINE; line < csv->GetLines(); line++)
 	{
@@ -155,7 +155,7 @@ void Data::InitFruitPhysics()
 void Data::InitAreaList()
 {
 	CsvReader* csv = new CsvReader("areaList.csv");
-	Area current;
+	AREA current;
 	std::string name;
 	for (int line = CSV_DATA_START_LINE; line < csv->GetLines(); line++)
 	{
@@ -205,7 +205,7 @@ void Data::InitSaveFruitData(int* score)
 {
 	saveFruitData.clear();
 	CsvReader* csv = new CsvReader("saveData.csv"); // 読み込むデータ
-	SaveFruitData current; // 確認中のフルーツ
+	SAVE_FRUIT_DATA current; // 確認中のフルーツ
 
 	if (csv->GetLines() > 0)
 	{

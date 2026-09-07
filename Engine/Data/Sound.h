@@ -31,7 +31,7 @@ namespace Sound
 	/// <param name="name">再生するファイルの名前</param>
 	/// <param name="isLoop">trueならループ再生</param>
 	/// <returns>成功したら0が返る</returns>
-	int Play(const std::string& name, bool isLoop);
+	int Play(const std::string& name, bool isLoop, bool isSE);
 
 	/// <summary>
 	/// 音の再生を止める

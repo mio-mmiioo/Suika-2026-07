@@ -1,8 +1,9 @@
 #pragma once
 
-struct Point
+// xy
+struct MY_POINT
 {
-	float x;
-	float y;
+	float x; // x方向
+	float y; // y方向
 };
 

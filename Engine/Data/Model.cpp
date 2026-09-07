@@ -3,12 +3,12 @@
 
 namespace Model
 {
-	std::vector<ModelData*> modelList;
+	std::vector<MODEL_DATA*> modelList;
 }
 
 int Model::Load(std::string fileName)
 {
-	ModelData* pModelData = new ModelData;
+	MODEL_DATA* pModelData = new MODEL_DATA;
 	pModelData->fileName = fileName;
 	pModelData->pFbx = nullptr;
 

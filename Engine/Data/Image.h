@@ -5,14 +5,14 @@
 namespace Image
 {
 	// 画像を管理するために必要なデータ
-	struct ImageData
+	struct IMAGE_DATA
 	{
 		Sprite* pSprite = nullptr;	// 2D画像を表示するためのクラス
 		std::string fileName;		// ファイルの名前
 	};
 
 	// 四角形を指定する
-	struct Rect
+	struct MY_RECT
 	{
 		float leftTopX;		// 左上のx座標
 		float leftTopY;		// 左上のy座標
@@ -57,6 +57,18 @@ namespace Image
 	/// <param name="hImage">画像のハンドル</param>
 	void DrawExtendRotateGraph(int x, int y, int width, int height, float rotate, int hImage);
 
+	/// <summary>
+	/// 切り抜き拡縮した画像を表示
+	/// </summary>
+	/// <param name="x">スクリーンのx座標</param>
+	/// <param name="y">スクリーンのy座標</param>
+	/// <param name="width">表示する画像の横幅</param>
+	/// <param name="height">表示する画像の縦幅</param>
+	/// <param name="rectX">切り抜く左上のx座標</param>
+	/// <param name="rectY">切り抜く左上のy座標</param>
+	/// <param name="rectWidth">切り抜く横幅</param>
+	/// <param name="rectHeight">切り抜く縦幅</param>
+	/// <param name="hImage">切り抜く画像のハンドル</param>
 	void DrawRectExtendGraph(int x, int y, int width, int height, int rectX, int rectY, int rectWidth, int rectHeight, int hImage);
 
 	/// <summary>

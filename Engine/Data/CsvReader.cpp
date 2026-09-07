@@ -64,7 +64,7 @@ CsvReader::CsvReader(std::string fileName)
 		}
 
 		// 行内を[,]で区切る
-		LineRecord lineRecord;
+		LINE_RECORD lineRecord;
 		int top = 0;
 		bool indq = false;
 		for (int n = 0; n < lineString.size(); n++)

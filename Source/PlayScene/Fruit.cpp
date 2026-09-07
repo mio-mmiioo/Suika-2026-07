@@ -5,7 +5,7 @@
 
 #include "../../ImGui/imgui.h"
 
-Fruit::Fruit(Data::FRUIT_TYPE fruitType, Point position)
+Fruit::Fruit(Data::FRUIT_TYPE fruitType, MY_POINT position)
 {
 	fruitData_ = Data::fruitDataList[fruitType];
 	position_ = position;

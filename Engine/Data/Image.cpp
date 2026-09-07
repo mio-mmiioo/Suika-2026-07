@@ -1,10 +1,9 @@
 #include "Image.h"
 #include <vector>
-#include <algorithm>
 
 namespace Image
 {
-	std::vector<ImageData*> imageList; // 読み込んだ画像を管理するためのクラス
+	std::vector<IMAGE_DATA*> imageList; // 読み込んだ画像を管理するためのクラス
 
 	float DEFAULT_ROTATE = 0.0f;	// 画像のrotateがセットされていない場合の値
 	float DEFAULT_ALPHA = 1.0f;		// 画像のalphaがセットされていない場合の値
@@ -20,12 +19,12 @@ namespace Image
 	/// <param name="hImage">画像のハンドル</param>
 	/// <param name="rotate">描画するときの回転量</param>
 	/// <param name="alpha">描画するときの透明度</param>
-	void DrawGraph(int x, int y, Rect rect, int width, int height, int hImage, float rotate, float alpha);
+	void DrawGraph(int x, int y, MY_RECT rect, int width, int height, int hImage, float rotate, float alpha);
 }
 
 int Image::Load(std::string fileName)
 {
-	ImageData* pImageData = new ImageData;
+	IMAGE_DATA* pImageData = new IMAGE_DATA;
 	pImageData->fileName = fileName;
 	pImageData->pSprite = nullptr;
 
@@ -47,7 +46,7 @@ int Image::Load(std::string fileName)
 	return((int)(imageList.size() - 1));
 }
 
-void Image::DrawGraph(int x, int y, Rect rect, int width, int height, int hImage, float rotate, float alpha)
+void Image::DrawGraph(int x, int y, MY_RECT rect, int width, int height, int hImage, float rotate, float alpha)
 {
 	RECT r;
 	r.left = (LONG)rect.leftTopX;

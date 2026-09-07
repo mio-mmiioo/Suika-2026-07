@@ -53,9 +53,9 @@ namespace GameMaster
 	std::list<Fruit*> deleteFruitList;	// 削除予定のフルーツリスト
 
 	bool isCheckGameOver;	// ゲームオーバーの可能性があるならtrue
-	Area box;				// 果物を入れる箱
-	Area sinnkanowa;		// フルーツの進化を表す図
-	Area score;				// 得点を表示する範囲
+	AREA box;				// 果物を入れる箱
+	AREA sinnkanowa;		// フルーツの進化を表す図
+	AREA score;				// 得点を表示する範囲
 	int scoreNumWidth;		// 得点の1つの数字の横幅
 	int scoreNumHeight;		// 得点の一つの数字の縦幅
 
@@ -67,11 +67,11 @@ void GameMaster::Init()
 	box = Data::areaList["box"];
 	sinnkanowa = Data::areaList["sinnkanowa"];
 	score = Data::areaList["score"];
-	Area number = Data::areaList["number"];
+	AREA number = Data::areaList["number"];
 	scoreNumWidth = number.rightDownX - number.leftTopX;
 	scoreNumHeight = number.rightDownY - number.leftTopY;
 	hBgm = "bgm01";
-	Sound::Play(hBgm, true);
+	Sound::Play(hBgm, true, false);
 	Sound::ChangeVolume(hBgm, 0.75f);
 
 	isCheckGameOver = false;
@@ -180,7 +180,7 @@ void GameMaster::FruitCheckPosition()
 		}
 
 		int supportCount = 0;
-		Point pos1 = fruitA->GetPosition();
+		MY_POINT pos1 = fruitA->GetPosition();
 
 		// 箱外に出ている可能性がある場合
 		if (box.leftTopX >= pos1.x || box.rightDownX <= pos1.x)
@@ -203,7 +203,7 @@ void GameMaster::FruitCheckPosition()
 			}
 
 			float d = fruitB->GetFruitData().distanceR + fruitA->GetFruitData().distanceR;
-			Point pos2 = fruitB->GetPosition();
+			MY_POINT pos2 = fruitB->GetPosition();
 			float x = pos2.x - pos1.x;
 			float y = pos2.y - pos1.y;
 			float distSq = x * x + y * y;
@@ -219,11 +219,11 @@ void GameMaster::FruitCheckPosition()
 					// 進化できるフルーツの場合
 					if (!(type == Data::FRUIT_TYPE::MAX_FRUIT_TYPE))
 					{
-						Point p = { (pos1.x + pos2.x) / 2 + Data::fruitPhysics["positionOffset"], (pos1.y + pos2.y) / 2 };
+						MY_POINT p = { (pos1.x + pos2.x) / 2 + Data::fruitPhysics["positionOffset"], (pos1.y + pos2.y) / 2 };
 						new Fruit(type, p);
 						new Effect(p, Data::fruitDataList[type].distanceR);
 						Observer::AddScore(Data::fruitDataList[type].score); // 得点の加算
-						Sound::Play("createFruit", false); // 生成音を鳴らす
+						Sound::Play("createFruit", false, true); // 生成音を鳴らす
 
 						// ここで削除するとアクセスエラーなど多々問題があるため、削除リストに追加
 						deleteFruitList.push_back(fruitA);
@@ -250,7 +250,7 @@ void GameMaster::FruitCheckPosition()
 				// めり込んでいる量
 				float distance = sqrtf(distSq);
 				float overlap = d - distance;
-				Point n = { x / distance, y / distance }; // 法線ベクトル
+				MY_POINT n = { x / distance, y / distance }; // 法線ベクトル
 
 				// 押し戻す　overlapが小さいなら押し戻さない
 				if (overlap >= Data::fruitPhysics["minOverLap"])
@@ -266,11 +266,11 @@ void GameMaster::FruitCheckPosition()
 				float pushPower = overlap * Data::fruitPhysics["fruitRollPower"];
 				if (fruitA->GetIsSleep() == false)
 				{
-					fruitA->AddVelocity(Point(-n.x * pushPower, 0.0f));
+					fruitA->AddVelocity(MY_POINT(-n.x * pushPower, 0.0f));
 				}
 				if (fruitB->GetIsSleep() == false)
 				{
-					fruitB->AddVelocity(Point(n.x* pushPower, 0.0f));
+					fruitB->AddVelocity(MY_POINT(n.x* pushPower, 0.0f));
 				}
 
 				// 位置をセットする
@@ -320,7 +320,7 @@ void GameMaster::FruitCheckPosition()
 
 bool GameMaster::FruitCheckBoxPosition(Fruit* fruit)
 {
-	Point p = fruit->GetPosition();
+	MY_POINT p = fruit->GetPosition();
 	float distanceR = fruit->GetFruitData().distanceR;
 	bool ret = false;
 
@@ -371,7 +371,7 @@ bool GameMaster::IsCheckGameOver()
 		if (IsFruitCheckGameOver(fruit) == true)
 		{
 			ret = true;
-			Point p = fruit->GetPosition();
+			MY_POINT p = fruit->GetPosition();
 
 			// 箱のふちと確認し、横にずらす
 			// これがないと、箱に重なりながら落ちてしまう
@@ -408,7 +408,7 @@ bool GameMaster::IsCheckGameOver()
 bool GameMaster::IsFruitCheckGameOver(Fruit* fruit)
 {
 	bool ret = false;
-	Point p = fruit->GetPosition();
+	MY_POINT p = fruit->GetPosition();
 	// 箱の外に出ているかを確認
 	if (p.x < box.leftTopX || p.x > box.rightDownX)
 	{
@@ -474,7 +474,7 @@ void GameMaster::SaveData()
 		file << Observer::GetScore() << std::endl;
 		for (auto& fruit : allFruitList)
 		{
-			Point pos = fruit->GetPosition();
+			MY_POINT pos = fruit->GetPosition();
 			Data::FRUIT_TYPE type = fruit->GetFruitData().type;
 			
 			// 置く前のフルーツなら考慮しない
@@ -503,11 +503,11 @@ void GameMaster::CreatePrevGame()
 {
 	int score = 0;
 	Data::InitSaveFruitData(&score); // 前回までのゲームの状況を読み込む
-	Data::SaveFruitData current;
+	Data::SAVE_FRUIT_DATA current;
 	for (int count = 0; count < Data::saveFruitData.size(); count++)
 	{
 		current = Data::saveFruitData[count];
-		new Fruit(current.type, Point(current.x, current.y));
+		new Fruit(current.type, MY_POINT(current.x, current.y));
 	}
 	Observer::SetScore(score); // スコアをセット
 	Observer::SetIsPrevGameCreated(true); // 前回のゲームを作成した報告

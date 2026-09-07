@@ -2,7 +2,7 @@
 #include "../../Engine/Input.h"
 #include "../../Engine/Data/Image.h"
 
-bool ButtonArea::IsMouseKeepInArea(Area area)
+bool ButtonArea::IsMouseKeepInArea(AREA area)
 {
 	int x = (int)Input::GetMousePosition().x;
 	int y = (int)Input::GetMousePosition().y;
@@ -14,7 +14,7 @@ bool ButtonArea::IsMouseKeepInArea(Area area)
 	return false;
 }
 
-bool ButtonArea::IsMouseInArea(Area area)
+bool ButtonArea::IsMouseInArea(AREA area)
 {
 	int prevX = (int)Input::GetPrevMousePosition().x;
 	int prevY = (int)Input::GetPrevMousePosition().y;
@@ -27,7 +27,7 @@ bool ButtonArea::IsMouseInArea(Area area)
 	return false;
 }
 
-bool ButtonArea::IsMouseInArea(Area area, int mouseX, int mouseY)
+bool ButtonArea::IsMouseInArea(AREA area, int mouseX, int mouseY)
 {
 	if (area.leftTopX < mouseX && mouseX < area.rightDownX)
 	{
@@ -39,7 +39,7 @@ bool ButtonArea::IsMouseInArea(Area area, int mouseX, int mouseY)
 	return false;
 }
 
-void ButtonArea::DrawArea(Area area)
+void ButtonArea::DrawArea(AREA area)
 {
 	int x = (int)area.leftTopX;
 	int y = (int)area.leftTopY;
@@ -48,7 +48,7 @@ void ButtonArea::DrawArea(Area area)
 	Image::DrawExtendGraph(x, y, width, height, area.hImage);
 }
 
-Button::Button(Area normal, Area select)
+Button::Button(AREA normal, AREA select)
 {
 	normal_ = normal;
 	select_ = select;

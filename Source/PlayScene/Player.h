@@ -25,10 +25,10 @@ private:
 	/// </summary>
 	void CreateFruitType();
 
-	Point fruitPosition_;	// 次に落とす予定の果物の場所
+	MY_POINT fruitPosition_;	// 次に落とす予定の果物の場所
 	float coolDownTimer_;	// 次に落とせるようになるまでの時間
 
 	Data::FRUIT_TYPE fruitType_;			// 置く予定のフルーツの種類
-	Data::FruitData fruitData_;				// 置く予定のフルーツのデータ
+	Data::FRUIT_DATA fruitData_;				// 置く予定のフルーツのデータ
 	std::vector<int> fruitAppearanceRate_;	// フルーツの出現率
 };

@@ -50,9 +50,9 @@ public:
 	float GetFloat(int line, int column);
 
 private:
-	struct LineRecord
+	struct LINE_RECORD
 	{
 		std::vector<std::string> record; // １行分のデータを入れる配列
 	};
-	std::vector<LineRecord> all; // すべての行の配列
+	std::vector<LINE_RECORD> all; // すべての行の配列
 };

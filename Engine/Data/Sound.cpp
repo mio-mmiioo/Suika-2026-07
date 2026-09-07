@@ -7,11 +7,16 @@
 
 namespace Sound
 {
+	/// <summary>
+	/// ボリュームを0.0f～0.1fにする
+	/// </summary>
+	/// <param name="volume">調整する音量</param>
+	/// <returns>調整後の値</returns>
 	float ClampVolume(float volume);
 
-	std::unique_ptr<DirectX::AudioEngine> audioEngine;
-	std::unordered_map<std::string, std::unique_ptr<DirectX::SoundEffect>> sounds;
-	std::unordered_map<std::string, std::unique_ptr<DirectX::SoundEffectInstance>> activeInstances;
+	std::unique_ptr<DirectX::AudioEngine> audioEngine; // 音を管理する大本
+	std::unordered_map<std::string, std::unique_ptr<DirectX::SoundEffect>> sounds; // SEなど1回鳴らすだけで十分な場合はこちら
+	std::unordered_map<std::string, std::unique_ptr<DirectX::SoundEffectInstance>> activeInstances; // BGMのようなループ処理などが必要な場合はこちら
 }
 
 void Sound::Initialize()
@@ -51,7 +56,7 @@ int Sound::Load(const std::string& name)
 	return 0;
 }
 
-int Sound::Play(const std::string& name, bool isLoop)
+int Sound::Play(const std::string& name, bool isLoop, bool isSE)
 {
 	auto it = sounds.find(name);
 	// 見つからなかった
@@ -60,8 +65,14 @@ int Sound::Play(const std::string& name, bool isLoop)
 		return -1;
 	}
 
+	// 1回鳴らして終わりのSEの場合
+	if (isSE == true)
+	{
+		sounds[name]->Play();
+		return 0;
+	}
+
 	// すでに同じ名前の音が再生中の場合、一度止めて破棄する
-	// 何体も敵を表示するのには向かない書き方
 	auto instanceIt = activeInstances.find(name);
 	if (instanceIt != activeInstances.end())
 	{
@@ -108,20 +119,14 @@ int Sound::ChangeVolume(const std::string& name, float volume)
 
 void Sound::Release()
 {
-	// 再生中の音を停止してから解放する
-	for (auto& active : activeInstances)
-	{
-		if (active.second != nullptr)
-		{
-			active.second->Stop(true);
-		}
-	}
+	audioEngine->Suspend(); // 再生中の音を停止
+
 	// スマートポインター( unique_ptr )で作成されたものは、clearすると自動でメモリも解放される
 	activeInstances.clear();
 	sounds.clear();
 	if (audioEngine != nullptr)
 	{
-		audioEngine.reset();
+		audioEngine.reset(); // AudioEngineも解放
 	}
 }
 

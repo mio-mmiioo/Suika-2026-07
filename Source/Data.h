@@ -26,7 +26,7 @@ namespace Data
 	};
 
 	// フルーツを管理するのに必要なデータ
-	struct FruitData
+	struct FRUIT_DATA
 	{
 		float distanceR;	// 当たり判定の半径
 		int score;			// 得点
@@ -35,7 +35,7 @@ namespace Data
 	};
 
 	// ゲームを保存するときに必要なフルーツのデータ
-	struct SaveFruitData
+	struct SAVE_FRUIT_DATA
 	{
 		FRUIT_TYPE type; // 種類
 		float x; // x座標
@@ -47,10 +47,10 @@ namespace Data
 
 	void InitSaveFruitData(int* score);
 
-	extern std::map<FRUIT_TYPE, FruitData> fruitDataList; // フルーツのデータリスト
-	extern std::vector<SaveFruitData> saveFruitData; // 保存したフルーツのデータ
+	extern std::map<FRUIT_TYPE, FRUIT_DATA> fruitDataList; // フルーツのデータリスト
+	extern std::vector<SAVE_FRUIT_DATA> saveFruitData; // 保存したフルーツのデータ
 	extern std::map<std::string, float> fruitPhysics;	// フルーツの物理計算に使用する数値
-	extern std::map<std::string, Area> areaList; // Areaの位置リスト
+	extern std::map<std::string, AREA> areaList; // Areaの位置リスト
 	extern std::map<std::string, int> image; // 画像のリスト
 	extern std::map<std::string, int> sound; // 音源のリスト
 }

@@ -20,8 +20,8 @@ PlayScene::PlayScene()
 	hBackground_ = Data::image["background"];
 	player_ = new Player();
 
-	Area endNormal = Data::areaList["endNormal"];
-	Area endSelect = Data::areaList["endSelect"];
+	AREA endNormal = Data::areaList["endNormal"];
+	AREA endSelect = Data::areaList["endSelect"];
 	end_ = new Button(endNormal, endSelect);
 
 	isGameOver_ = false;
@@ -45,7 +45,7 @@ void PlayScene::Update()
 	{
 		if (GameMaster::Update() == 1)
 		{
-			Sound::Play("gameOverFruit", false);
+			Sound::Play("gameOverFruit", false, true);
 			isGameOver_ = true;
 			player_->DestroyMe();
 		}
@@ -62,7 +62,7 @@ void PlayScene::Update()
 	if (end_->GetIsPushArea() == true)
 	{
 		SceneManager::ChangeScene("TITLE");
-		Sound::Play("decide", FALSE);
+		Sound::Play("decide", FALSE, true);
 		if (isGameOver_ == false)
 		{
 			player_->DestroyMe();
@@ -72,7 +72,7 @@ void PlayScene::Update()
 
 	if (end_->GetIsOnArea() == true)
 	{
-		Sound::Play("select", false);
+		Sound::Play("select", false, true);
 	}
 
 #if _DEBUG

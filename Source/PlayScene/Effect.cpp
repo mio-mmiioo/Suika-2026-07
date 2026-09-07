@@ -8,7 +8,7 @@ namespace EFFECT
 	const int MAX_ANIM = 4;		// アニメーションの最大数
 }
 
-Effect::Effect(Point position, int fruitDistanceR)
+Effect::Effect(MY_POINT position, int fruitDistanceR)
 {
 	position_ = position;
 	position_.x -= (float)fruitDistanceR;

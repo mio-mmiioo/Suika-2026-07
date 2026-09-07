@@ -13,13 +13,13 @@ public:
 	/// </summary>
 	/// <param name="position">位置</param>
 	/// <param name="fruitDistanceR">半径</param>
-	Effect(Point position, int fruitDistanceR);
+	Effect(MY_POINT position, int fruitDistanceR);
 	~Effect() override;		// デストラクタ
 	void Update() override; // 更新処理
 	void Draw() override;	// 描画処理
 
 private:
-	Point position_;	// 位置
+	MY_POINT position_;	// 位置
 	float timer_;		// 時間
 	int hImage_;		// 画像ハンドル
 	int anim_;			// アニメーションの状態

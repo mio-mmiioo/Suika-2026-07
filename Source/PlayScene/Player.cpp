@@ -9,7 +9,7 @@
 
 namespace PLAYER
 {
-	const Point INIT_FRUIT_POSITION = { 512.0f, 50.0f }; // 次に置くフルーツの初期位置
+	const MY_POINT INIT_FRUIT_POSITION = { 512.0f, 50.0f }; // 次に置くフルーツの初期位置
 	const float COOL_DOWN_TIME = 0.5f; // 連打を防ぐ時間
 }
 
@@ -72,7 +72,7 @@ void Player::Update()
 	{
 		new Fruit(fruitType_, fruitPosition_);
 		Observer::AddScore(fruitData_.score);
-		Sound::Play("putFruit", false);
+		Sound::Play("putFruit", false, true);
 
 		// 次のフルーツの作成
 		CreateFruitType();

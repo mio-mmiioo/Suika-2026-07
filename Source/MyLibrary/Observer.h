@@ -2,7 +2,10 @@
 
 namespace Observer
 {
-	void Init(); // 初期化
+	/// <summary>
+	/// 初期化
+	/// </summary>
+	void Init();
 
 	/// <summary>
 	/// 得点の代入

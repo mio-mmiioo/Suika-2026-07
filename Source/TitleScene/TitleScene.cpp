@@ -9,18 +9,18 @@
 
 TitleScene::TitleScene()
 {
-	Area newStartNormal = Data::areaList["newStartNormal"];
-	Area newStartSelect = Data::areaList["newStartSelect"];
+	AREA newStartNormal = Data::areaList["newStartNormal"];
+	AREA newStartSelect = Data::areaList["newStartSelect"];
 	newStart_ = new Button(newStartNormal, newStartSelect); // 新しく始めるボタン
 
-	Area continueStartNormal = Data::areaList["continueStartNormal"];
-	Area continueStartSelect = Data::areaList["continueStartSelect"];
+	AREA continueStartNormal = Data::areaList["continueStartNormal"];
+	AREA continueStartSelect = Data::areaList["continueStartSelect"];
 	continueStart_ = new Button(continueStartNormal, continueStartSelect);
 
 	title_ = Data::areaList["title"];
 	hBackground_ = Data::image["background"];
 	bgm_ = "bgm02";
-	Sound::Play(bgm_, TRUE);
+	Sound::Play(bgm_, TRUE, false);
 	volume_ = 0.75f;
 	Sound::ChangeVolume(bgm_, volume_);
 	
@@ -46,7 +46,7 @@ void TitleScene::Update()
 	if (newStart_->GetIsOnArea() == true ||
 		continueStart_->GetIsOnArea() == true && Data::saveFruitData.size() > 0)
 	{
-		Sound::Play("select", false); // 選択音
+		Sound::Play("select", false, true); // 選択音
 	}
 
 	// ボタンが押された
@@ -55,14 +55,14 @@ void TitleScene::Update()
 		Observer::SetIsNewGame(true);
 		Observer::SetIsPrevGameCreated(true);
 		Observer::SetScore(0); // 新しくゲームを始めるため、得点も0にする
-		Sound::Play("decide", false); // 決定音
+		Sound::Play("decide", false, true); // 決定音
 		SceneManager::ChangeScene("PLAY");
 	}
 	if (continueStart_->GetIsPushArea() == true && Data::saveFruitData.size() > 0)
 	{
 		Observer::SetIsNewGame(false);
 		Observer::SetIsPrevGameCreated(false);
-		Sound::Play("decide", false);
+		Sound::Play("decide", false, true);
 		SceneManager::ChangeScene("PLAY");
 	}
 

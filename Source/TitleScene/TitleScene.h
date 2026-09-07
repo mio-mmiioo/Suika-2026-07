@@ -14,7 +14,7 @@ public:
 private:
 	Button* newStart_;		// はじめる
 	Button* continueStart_;	// 前回のつづきから始める
-	Area title_;			// タイトルの画像
+	AREA title_;			// タイトルの画像
 	std::string bgm_;		// bgm
 	int hBackground_;		// 背景
 
